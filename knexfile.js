@@ -22,12 +22,12 @@ module.exports = {
 
     // Migration settings for development
     migrations: {
-      directory: "./migrations", // Directory where migration files are stored (e.g., ./migrations). These are SQL instructions to create, alter, or delete tables.
+      directory: "./api/migrations", // Directory where migration files are stored (e.g., ./migrations). These are SQL instructions to create, alter, or delete tables.
     },
 
     // Seed settings for development (optional)
     seeds: {
-      directory: "./seeds", // Directory where seed files are stored. Seeds allow you to insert initial data into the database for development or testing.
+      directory: "./api/seed-data", // Directory where seed files are stored. Seeds allow you to insert initial data into the database for development or testing.
     },
   },
 
