@@ -25,7 +25,7 @@ const RootLayout = ({ children }) => {
   return (
     <html lang="en">
       {/* Declaring the language for the document to be English */}
-      <body className={outfitFont.className}>
+      <body className={`${outfitFont.className} bg-darkBlue`}>
         {/* This is a container for the main layout styles */}
         <div className="main">
           {/* This div is styled with a class 'gradient', which likely adds a gradient background */}
