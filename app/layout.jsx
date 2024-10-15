@@ -4,6 +4,7 @@ import "../styles/global.css";
 import { Outfit } from "@next/font/google";
 // Importing React to create functional components.
 import React from "react";
+import Nav from "./ui/nav/nav.jsx";
 
 // This object defines metadata for the application, such as the title and description.
 export const metadata = {
@@ -25,12 +26,9 @@ const RootLayout = ({ children }) => {
   return (
     <html lang="en">
       {/* Declaring the language for the document to be English */}
-      <body className={`${outfitFont.className} bg-darkBlue`}>
+      <body className={`${outfitFont.className} bg-darkBlue  h-lvh`}>
         {/* This is a container for the main layout styles */}
-        <div className="main">
-          {/* This div is styled with a class 'gradient', which likely adds a gradient background */}
-          <div className="background" />
-        </div>
+        <Nav />
         {/* The <main> tag is semantically used for the main content of the page. */}
         {/* The 'children' prop will be rendered here, representing the content of each page */}
         <main className="app">{children}</main>
