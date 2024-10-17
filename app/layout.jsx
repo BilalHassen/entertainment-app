@@ -1,16 +1,8 @@
-// Importing the global CSS file to apply styles throughout the entire application.
+import Head from "next/head";
 import "../styles/global.css";
-// Importing the Outfit font from Google Fonts with Next.js
 import { Outfit } from "@next/font/google";
-// Importing React to create functional components.
 import React from "react";
 import Nav from "./ui/nav/nav.jsx";
-
-// This object defines metadata for the application, such as the title and description.
-export const metadata = {
-  title: "Movies App", // The title of the app, displayed in the browser tab or window title.
-  description: "Discover & organize your favourite movies and videos", // A brief description of the app.
-};
 
 // Corrected font import with the Outfit font
 const outfitFont = Outfit({
@@ -20,18 +12,24 @@ const outfitFont = Outfit({
 
 // The main layout component for the entire application.
 const RootLayout = ({ children }) => {
-  // The RootLayout component is using the 'children' prop.
-  // This prop will contain the content (components) passed to RootLayout when used elsewhere in the app.
-
   return (
     <html lang="en">
+      <Head>
+        {/* Adding the viewport meta tag */}
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Movies App</title>
+        <meta
+          name="description"
+          content="Discover & organize your favourite movies and videos"
+        />
+      </Head>
       {/* Declaring the language for the document to be English */}
-      <body className={`${outfitFont.className} bg-darkBlue  h-lvh`}>
+      <body className={`${outfitFont.className} bg-darkBlue h-lvh`}>
         {/* This is a container for the main layout styles */}
         <Nav />
         {/* The <main> tag is semantically used for the main content of the page. */}
         {/* The 'children' prop will be rendered here, representing the content of each page */}
-        <main className="app">{children}</main>
+        <main className="app px-4">{children}</main>
       </body>
     </html>
   );

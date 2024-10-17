@@ -3,14 +3,16 @@ import "../../../styles/global.css";
 export default function Nav() {
   return (
     <nav className="nav h-16 flex flex-row justify-between items-center px-4 bg-semiDarkBlue">
-      <Image
-        className="movie-icon-img"
-        src="/assets/logo.svg"
-        alt="Movies App Logo"
-        width={25} // Add width and height for optimized rendering
-        height={20}
-        objectFit="contain" // Ensure the image fits within 25x25 without distorting
-      />
+      <button>
+        <Image
+          className="movie-icon-img"
+          src="/assets/logo.svg"
+          alt="Movies App Logo"
+          width={25} // Add width and height for optimized rendering
+          height={20}
+          objectFit="contain" // Ensure the image fits within 25x25 without distorting
+        />
+      </button>
       <div className="nav-image-container items-center flex gap-6">
         <button>
           <Image
@@ -49,14 +51,16 @@ export default function Nav() {
           />
         </button>
       </div>
-      <Image
-        className="nav-avatar"
-        src="/assets/image-avatar.png"
-        alt="Home clickable icon"
-        width={25} // Add width and height for optimized rendering
-        height={20}
-        objectFit="contain" // Ensure the image fits within 25x25 without distorting
-      ></Image>
+      <button>
+        <Image
+          className="nav-avatar"
+          src="/assets/image-avatar.png"
+          alt="Home clickable icon"
+          width={25} // Add width and height for optimized rendering
+          height={20}
+          objectFit="contain" // Ensure the image fits within 25x25 without distorting
+        ></Image>
+      </button>
     </nav>
   );
 }

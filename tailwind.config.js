@@ -5,6 +5,14 @@ module.exports = {
     "./components/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
+    screens: {
+      // Mobile-first design (default)
+      sm: "640px", // Tablet breakpoint
+      md: "768px", // Small desktop breakpoint
+      lg: "1024px", // Large desktop breakpoint
+      xl: "1280px", // Extra large desktop breakpoint
+      "2xl": "1536px", // Super large desktop
+    },
     extend: {
       colors: {
         red: "#FC4747", // Red from design system
