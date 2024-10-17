@@ -24,12 +24,12 @@ const RootLayout = ({ children }) => {
         />
       </Head>
       {/* Declaring the language for the document to be English */}
-      <body className={`${outfitFont.className} bg-darkBlue h-lvh`}>
+      <body className={`${outfitFont.className} bg-darkBlue h-lvh lg:flex`}>
         {/* This is a container for the main layout styles */}
         <Nav />
         {/* The <main> tag is semantically used for the main content of the page. */}
         {/* The 'children' prop will be rendered here, representing the content of each page */}
-        <main className="app px-4">{children}</main>
+        <main className="app px-4 lg:lvh lg:my-4">{children}</main>
       </body>
     </html>
   );
