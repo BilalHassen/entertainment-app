@@ -7,7 +7,7 @@ import { getTrendingVideos } from "./lib/utils.js";
 import TrendingVideos from "./components/TrendingVideos.jsx";
 
 export default function Page() {
-  const [trendingVideos, setTrendingVideos] = useState();
+  const [trendingVideos, setTrendingVideos] = useState([]);
 
   useEffect(() => {
     const handleTrendingVideos = async () => {

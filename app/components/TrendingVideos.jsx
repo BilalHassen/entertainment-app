@@ -2,7 +2,7 @@
 
 "use client"; // Ensure this is at the very top
 import { useState, useEffect } from "react";
-import TrendingVideoCard from "./TrendingVideoCard";
+import TrendingVideoCard from "./TrendingVideoCard.jsx";
 
 export default function TrendingVideos({ trendingVideos }) {
   console.log(trendingVideos);
