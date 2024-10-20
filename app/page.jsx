@@ -4,7 +4,7 @@ import axios from "axios";
 import React from "react";
 import { useState, useEffect } from "react";
 import { getTrendingVideos } from "./lib/utils.js";
-import TrendingVideos from "./components/trendingVideos";
+import TrendingVideos from "./components/TrendingVideos";
 
 export default function Page() {
   const [trendingVideos, setTrendingVideos] = useState();
