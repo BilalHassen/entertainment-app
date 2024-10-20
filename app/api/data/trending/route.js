@@ -1,11 +1,8 @@
 // app/api/data/recommended/route.js
 import { NextResponse } from "next/server";
-import knex from "knex"; // Import Knex
-import knexConfig from "../../../../knexfile.js"; // Import your Knex configuration
+import dataBase from "../../../../knexfile.js"; // Import the initialized Knex instance
 
-// Initialize Knex with the configuration
-const dataBase = knex(knexConfig);
-
+// This is a named export for the GET method
 export async function GET() {
   try {
     const trendingVideos = await dataBase("movies")
