@@ -1,13 +1,16 @@
-// app/api/data/recommended/route.js
+// app/api/data/trending/route.js
 import { NextResponse } from "next/server";
-import dataBase from "../../../../knexfile.js"; // Import the initialized Knex instance
+import knex from "knex";
+import knexConfig from "../../../../knexfile.js";
 
-// This is a named export for the GET method
+// Initialize the database connection
+const db = knex(knexConfig);
+
 export async function GET() {
   try {
-    const trendingVideos = await dataBase("movies")
-      .join("thumbnails", "movies.id", "=", "thumbnails.movie_id") // Join before select
-      .where("movies.is_trending", true) // Filter only trending movies
+    const trendingVideos = await db("movies")
+      .join("thumbnails", "movies.id", "=", "thumbnails.movie_id")
+      .where("movies.is_trending", true)
       .select(
         "movies.id",
         "movies.title",
@@ -16,22 +19,19 @@ export async function GET() {
         "movies.rating",
         "movies.is_bookmarked",
         "movies.is_trending",
-        dataBase.raw(`
-      json_object_agg(thumbnails.size, thumbnails.url) AS thumbnails
-    `) // Aggregates the thumbnails into an object
+        db.raw("json_object_agg(thumbnails.size, thumbnails.url) AS thumbnails")
       )
-      .groupBy("movies.id"); // Group by movie ID to avoid duplication
+      .groupBy("movies.id");
 
-    console.log(trendingVideos);
     return NextResponse.json(trendingVideos);
   } catch (error) {
     console.error("Database Error:", error);
     return NextResponse.json(
       {
-        message: "Error fetching recommended movies",
+        message: "Error fetching trending videos",
         error: error.message,
       },
-      { status: 500 } // Return 500 Internal Server Error status
+      { status: 500 }
     );
   }
 }
