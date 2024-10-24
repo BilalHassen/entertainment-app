@@ -1,7 +1,7 @@
 import axios from "axios";
 
 export const getTrendingVideos = async () => {
-  const url = "http://localhost:3000/api/data/trending";
+  const url = "http://localhost:3000/api/videos/trending";
   try {
     const response = await axios.get(url);
     return response.data;
