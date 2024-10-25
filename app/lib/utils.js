@@ -1,7 +1,8 @@
 import axios from "axios";
 
 export const getTrendingVideos = async () => {
-  const url = "http://localhost:3000/api/videos/trending";
+  const baseURL = process.env.NEXT_PUBLIC_API_BASE_URL;
+  const url = `${baseURL}/videos/trending`;
   try {
     const response = await axios.get(url);
     return response.data;
