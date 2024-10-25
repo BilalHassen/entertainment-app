@@ -26,7 +26,6 @@ const config = {
       password: process.env.DB_PASSWORD,
       database: process.env.DB_NAME,
       port: process.env.DB_PORT || 5432,
-      ssl: { rejectUnauthorized: false }, // Optional, use only if your production DB requires SSL.
     },
     migrations: {
       directory: "./migrations",
