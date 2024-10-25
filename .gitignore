@@ -37,3 +37,5 @@ next-env.d.ts
 
 /app/ui/placeholder
 /notes.md
+.env.production
+.env.local
