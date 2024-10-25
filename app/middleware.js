@@ -2,7 +2,7 @@ import { NextResponse } from "next/server";
 
 export function middleware() {
   // Get the allowed origin from environment variables
-  const allowedOrigin = process.env.NEXT_PUBLIC_ALLOWED_ORIGIN;
+  const allowedOrigin = process.env.NEXT_PUBLIC_API_BASE_URL;
 
   // retrieve the current response
   const res = NextResponse.next();
