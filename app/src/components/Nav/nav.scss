@@ -1,0 +1,34 @@
+@use "../../styles/partials/mixins" as *;
+@use "../../styles/partials/variables" as *;
+.nav {
+  background-color: $midnight-blue;
+  height: 5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0rem 1.6rem;
+
+  // for first and last images
+  &__logo,
+  &__avatar {
+    width: 2.5rem;
+    height: 2.2rem;
+    cursor: pointer;
+  }
+
+  // box for middle icons
+  &__box {
+    display: flex;
+    gap: 2rem;
+  }
+
+  // middle icons
+  &__home-icon,
+  &__movies-icon,
+  &__tv-icon,
+  &__bookmark-icon {
+    height: 1.8rem;
+    width: 1.8rem;
+    cursor: pointer;
+  }
+}

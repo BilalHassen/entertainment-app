@@ -1,11 +1,11 @@
 import { useState } from "react";
 
 import "./App.scss";
-
+import Nav from "./components/Nav/nav";
 function App() {
   return (
     <>
-      <h1>Trending</h1>
+      <Nav />
     </>
   );
 }
