@@ -1,6 +1,7 @@
 @use "./styles/partials/text" as *;
 @use "./styles/partials/variables" as *;
 @use "./styles/partials/mixins" as *;
+@use "./styles/partials/global" as *;
 
 * {
   margin: 0;
@@ -11,11 +12,8 @@
 }
 
 h1 {
-  @include m-h1;
-}
-
-p {
-  @include p-1;
+  font-size: 3rem;
+  color: $white;
 }
 
 ul {
