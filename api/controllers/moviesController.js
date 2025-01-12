@@ -6,6 +6,7 @@ async function getTrendingVideos(req, res) {
   try {
     const trendingVideos = await knex("movies")
       .join("thumbnails", "movies.id", "=", "thumbnails.movie_id")
+      .where("movies.is_trending", "=", "true")
       .select(
         "movies.id",
         "movies.title",
