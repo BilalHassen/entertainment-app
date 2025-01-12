@@ -1,11 +1,16 @@
 import { useState } from "react";
 
 import "./App.scss";
-
+import Nav from "./components/Nav/nav";
 function App() {
   return (
     <>
-      <h1>Trending</h1>
+      <div className="app-wrapper">
+        <Nav />
+        <div className="flex-child">
+          <h1>hello world</h1>
+        </div>
+      </div>
     </>
   );
 }
