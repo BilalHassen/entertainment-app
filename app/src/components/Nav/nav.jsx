@@ -14,24 +14,24 @@ export default function () {
           />
           <DynamicImage
             src="/assets/icon-nav-movies.svg"
-            alt="main-logo"
+            alt="icon for movies"
             name="nav__movies-icon"
           />
           <DynamicImage
             src="/assets/icon-nav-tv-series.svg"
-            alt="main-logo"
+            alt="icon for tv"
             name="nav__tv-icon"
           />
           <DynamicImage
             src="/assets/icon-nav-bookmark.svg"
-            alt="main-logo"
+            alt="icon for bookmarks"
             name="nav__bookmark-icon"
           />
         </div>
 
         <DynamicImage
           src="/assets/image-avatar.png"
-          alt="main-logo"
+          alt="icon for avatar"
           name="nav__avatar"
         />
       </nav>
