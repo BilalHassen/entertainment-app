@@ -155,12 +155,23 @@
 @include desktop-small {
   .nav {
     flex-direction: column;
-    height: 100vh;
+    min-height: 800px;
+    padding: 4rem 0rem;
+    width: 10rem;
 
     // box for middle icons
     &__box {
       gap: 4rem;
       flex-direction: column;
+      align-items: center;
+      flex-grow: 1;
+    }
+
+    &__desktop-wrapper {
+      display: flex;
+      flex-direction: column;
+      gap: 4rem;
+      flex-grow: 1;
     }
   }
 }
