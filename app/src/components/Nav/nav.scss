@@ -1,5 +1,6 @@
 @use "../../styles/partials/mixins" as *;
 @use "../../styles/partials/variables" as *;
+
 .nav {
   background-color: $midnight-blue;
   height: 5rem;
@@ -16,6 +17,22 @@
     cursor: pointer;
   }
 
+  &__logo {
+    transition: filter 0.3s ease-in-out;
+
+    &:hover {
+      filter: contrast(150%);
+    }
+  }
+
+  &__avatar {
+    transition: filter 0.3s ease-in-out;
+
+    &:hover {
+      filter: brightness(1.3);
+    }
+  }
+
   // box for middle icons
   &__box {
     display: flex;
@@ -30,5 +47,120 @@
     height: 1.8rem;
     width: 1.8rem;
     cursor: pointer;
+    transition: filter 0.3s ease-in-out;
+
+    &:hover {
+      filter: brightness(0) invert(1);
+    }
+  }
+}
+
+@include mobile-medium {
+  .nav {
+    height: 6rem;
+
+    // for first and last images
+    &__logo,
+    &__avatar {
+      width: 3.5rem;
+      height: 3rem;
+    }
+
+    // box for middle icons
+    &__box {
+      gap: 2rem;
+    }
+
+    // middle icons
+    &__home-icon,
+    &__movies-icon,
+    &__tv-icon,
+    &__bookmark-icon {
+      height: 2rem;
+      width: 2rem;
+      cursor: pointer;
+    }
+  }
+}
+
+@include tablet-small {
+  .nav {
+    margin: 2rem;
+    border-radius: 10px;
+    height: 7rem;
+    padding: 0rem 3rem;
+
+    // for first and last images
+    &__logo,
+    &__avatar {
+      width: 3.5rem;
+      height: 3rem;
+    }
+
+    // box for middle icons
+    &__box {
+      gap: 2.5rem;
+    }
+
+    // middle icons
+    &__home-icon,
+    &__movies-icon,
+    &__tv-icon,
+    &__bookmark-icon {
+      height: 2.3rem;
+      width: 2.3rem;
+      cursor: pointer;
+    }
+  }
+}
+
+@include tablet-medium {
+  .nav {
+    margin: 3rem;
+    height: 10rem;
+    padding: 0rem 3rem;
+
+    // for first and last images
+    &__logo,
+    &__avatar {
+      width: 5.5rem;
+      height: 4.5rem;
+    }
+
+    // box for middle icons
+    &__box {
+      gap: 4rem;
+    }
+
+    // middle icons
+    &__home-icon,
+    &__movies-icon,
+    &__tv-icon,
+    &__bookmark-icon {
+      height: 3.3rem;
+      width: 3.3rem;
+      cursor: pointer;
+    }
+  }
+}
+
+@include tablet-large {
+  .nav {
+    margin: 5rem;
+    height: 10rem;
+    padding: 0rem 3rem;
+  }
+}
+
+@include desktop-small {
+  .nav {
+    flex-direction: column;
+    height: 100vh;
+
+    // box for middle icons
+    &__box {
+      gap: 4rem;
+      flex-direction: column;
+    }
   }
 }

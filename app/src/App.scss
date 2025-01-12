@@ -33,3 +33,9 @@ textarea {
   overflow: hidden;
   resize: none;
 }
+
+@include desktop-small {
+  .app-wrapper {
+    display: flex;
+  }
+}

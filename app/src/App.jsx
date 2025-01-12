@@ -5,7 +5,12 @@ import Nav from "./components/Nav/nav";
 function App() {
   return (
     <>
-      <Nav />
+      <div className="app-wrapper">
+        <Nav />
+        <div className="flex-child">
+          <h1>hello world</h1>
+        </div>
+      </div>
     </>
   );
 }
