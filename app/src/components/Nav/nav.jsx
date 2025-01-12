@@ -1,23 +1,13 @@
 import "./nav.scss";
 import DynamicImage from "../DynamicImage/DynamicImage";
 import { useState, useEffect } from "react";
+import useWindowWidth from "../../hooks/useWindowWidth";
 import React from "react";
 
 export default function () {
-  const [width, setWidth] = useState(window.innerWidth);
+  const width = useWindowWidth();
 
-  useEffect(() => {
-    const handleResize = () => {
-      setWidth(window.innerWidth);
-    };
-
-    window.addEventListener("resize", handleResize);
-
-    return () => {
-      window.removeEventListener("resize", handleResize);
-    };
-  }, []);
-
+  // react fragment is doesnt affect layout.
   const Wrapper = width >= 1366 ? "div" : React.Fragment;
 
   return (
