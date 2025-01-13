@@ -1,6 +1,9 @@
 import React from "react";
 import DynamicImage from "../DynamicImage/DynamicImage";
 import "./TrendingVideoCard.scss";
+import emptyBookMark from "../../../public/assets/icon-bookmark-empty.svg";
+import movie from "../../../public/assets/icon-category-movie.svg";
+import tv from "../../../public/assets/icon-category-tv.svg";
 
 function TrendingVideoCard({
   category,
@@ -11,7 +14,7 @@ function TrendingVideoCard({
   url,
   year,
 }) {
-  console.log(url[0]);
+  console.log(category);
   return (
     <div
       className="trendingVideos__card"
@@ -21,7 +24,27 @@ function TrendingVideoCard({
         backgroundPosition: "center",
       }}
     >
-      <h1>content box</h1>
+      <div className="trendingVideos__content">
+        <button className="trendingVideos__book-btn">
+          <img
+            className="trendingVideos__bookmark-icon"
+            src={emptyBookMark}
+            alt="bookmark icon"
+          />
+        </button>
+        <div className="trendVideos__text-content">
+          <div className="trendingVideos__type-box">
+            <p className="trendingVideos__year">{year}</p>
+            <img
+              className="trendingVideos__category-icon"
+              src={category === "Movie" ? movie : tv}
+            />
+            <p className="trendingVideos__category">{category}</p>
+            <p className="trendingVideos__rating">{rating}</p>
+          </div>
+          <h3 className="trendingVideos__title">{title}</h3>
+        </div>
+      </div>
     </div>
   );
 }
