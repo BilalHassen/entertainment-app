@@ -9,7 +9,9 @@ function App() {
       <VideoProvider>
         <div className="app-wrapper">
           <Nav />
-          <Trending />
+          <div className="content-wrapper">
+            <Trending />
+          </div>
         </div>
       </VideoProvider>
     </>
