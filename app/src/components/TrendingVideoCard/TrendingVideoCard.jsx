@@ -14,7 +14,6 @@ function TrendingVideoCard({
   url,
   year,
 }) {
-  console.log(category);
   return (
     <div
       className="trendingVideos__card"

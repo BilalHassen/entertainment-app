@@ -8,9 +8,6 @@ import "./Trending.scss";
 function Trending() {
   const { trendingVideos } = useVideosContext(); // Access the context
 
-  useEffect(() => {
-    console.log(trendingVideos);
-  }, [trendingVideos]);
   return (
     <>
       <h1>Trending</h1>
