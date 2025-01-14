@@ -32,17 +32,22 @@ function TrendingVideoCard({
             alt="bookmark icon"
           />
         </button>
-        <div className="trendVideos__text-content">
-          <div className="trendingVideos__type-box">
-            <p className="trendingVideos__year">{year}</p>
-            <img
-              className="trendingVideos__category-icon"
-              src={category === "Movie" ? movie : tv}
-            />
-            <p className="trendingVideos__category">{category}</p>
+        <div className="trendingVideos__text-content">
+          <div className="trendingVideos__flex-wrapper">
+            <div className="trendingVideos__type-box">
+              <p className="trendingVideos__year">{year} </p>
+              {"."}
+              <img
+                className="trendingVideos__category-icon"
+                src={category === "Movie" ? movie : tv}
+              />
+              <p className="trendingVideos__category">{category}</p>
+            </div>
+            <h3 className="trendingVideos__title">{title}</h3>
+          </div>
+          <div className="trendingVideos__rating-box">
             <p className="trendingVideos__rating">{rating}</p>
           </div>
-          <h3 className="trendingVideos__title">{title}</h3>
         </div>
       </div>
     </div>
