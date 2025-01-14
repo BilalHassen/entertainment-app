@@ -33,14 +33,3 @@ textarea {
   overflow: hidden;
   resize: none;
 }
-
-@include desktop-small {
-  .app-wrapper {
-    display: flex;
-  }
-}
-
-// wrapper for all content
-.content-wrapper {
-  margin: 0rem 1.6rem;
-}
