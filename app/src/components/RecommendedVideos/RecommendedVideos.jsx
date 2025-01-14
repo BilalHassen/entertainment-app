@@ -1,4 +1,5 @@
 import React from "react";
+import RecommendedVideosCard from "../RecommendedVideosCard/RecommendedVideosCard";
 import { useVideosContext } from "../../context/videoContext";
 
 function RecommendedVideos() {
@@ -7,7 +8,33 @@ function RecommendedVideos() {
   return (
     <>
       <h1>Recommended for you</h1>
-      <div></div>
+      <section className="recommendedVideos">
+        {recommendedVideos.map((video) => {
+          const {
+            category,
+            id,
+            is_bookmarked,
+            is_recommended,
+            rating,
+            title,
+            url,
+            year,
+          } = video;
+          return (
+            <RecommendedVideosCard
+              key={video.index}
+              category={category}
+              id={id}
+              is_bookmarked={is_bookmarked}
+              is_recommended={is_recommended}
+              rating={rating}
+              title={title}
+              year={year}
+              url={url}
+            />
+          );
+        })}
+      </section>
     </>
   );
 }

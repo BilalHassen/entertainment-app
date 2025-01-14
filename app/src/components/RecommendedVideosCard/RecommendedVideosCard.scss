@@ -1,0 +1,27 @@
+.recommendedVideos {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: auto;
+  gap: 1.6rem;
+
+  &__thumbnail {
+    border-radius: 4px;
+    width: 164px;
+    height: 100px;
+  }
+
+  &__type-box {
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+  }
+
+  &__category,
+  &__year {
+    color: lightgray;
+  }
+
+  &__title {
+    color: white;
+  }
+}
