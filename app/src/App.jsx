@@ -1,16 +1,19 @@
 import { useState } from "react";
-
+import Trending from "./components/Trending/Trending";
 import "./App.scss";
 import Nav from "./components/Nav/nav";
+import { VideoProvider } from "./context/videoContext";
 function App() {
   return (
     <>
-      <div className="app-wrapper">
-        <Nav />
-        <div className="flex-child">
-          <h1>hello world</h1>
+      <VideoProvider>
+        <div className="app-wrapper">
+          <Nav />
+          <div className="content-wrapper">
+            <Trending />
+          </div>
         </div>
-      </div>
+      </VideoProvider>
     </>
   );
 }
