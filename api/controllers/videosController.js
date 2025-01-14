@@ -58,8 +58,30 @@ async function getTrendingVideos(req, res) {
   }
 }
 
+async function getRecommendedVideos(req, res) {
+  try {
+    const recommendedVideos = await knex("movies")
+      .join("thumbnails", "movies.id", "=", "thumbnails.movie_id")
+      .where("movies.is_recommended", "=", "true")
+      .select(
+        "movies.id",
+        "movies.title",
+        "movies.year",
+        "movies.category",
+        "movies.rating",
+        "movies.is_bookmarked",
+        "movies.is_recommended",
+        "thumbnails.url"
+      );
+    res.status(200).json(recommendedVideos);
+  } catch (error) {
+    res.status(500).json("LOL SOMETHING WENT WRONG");
+  }
+}
+
 // use node module to export this function into other files
 
 module.exports = {
   getTrendingVideos,
+  getRecommendedVideos,
 };
