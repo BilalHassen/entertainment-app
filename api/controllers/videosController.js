@@ -6,7 +6,7 @@ async function getTrendingVideos(req, res) {
   try {
     const trendingVideos = await knex("movies")
       .join("thumbnails", "movies.id", "=", "thumbnails.movie_id")
-      .where("movies.is_trending", "=", "true")
+      .where("movies.is_trending", "=", true)
       .select(
         "movies.id",
         "movies.title",
@@ -62,7 +62,7 @@ async function getRecommendedVideos(req, res) {
   try {
     const recommendedVideos = await knex("movies")
       .join("thumbnails", "movies.id", "=", "thumbnails.movie_id")
-      .where("movies.is_recommended", "=", "true")
+      .where("movies.is_recommended", "=", true)
       .select(
         "movies.id",
         "movies.title",
@@ -73,9 +73,50 @@ async function getRecommendedVideos(req, res) {
         "movies.is_recommended",
         "thumbnails.url"
       );
-    res.status(200).json(recommendedVideos);
+
+    const existingVideos = {};
+
+    recommendedVideos.forEach((video) => {
+      // get data from video object
+      const {
+        id,
+        title,
+        year,
+        category,
+        rating,
+        is_bookmarked,
+        is_recommended,
+        url,
+      } = video;
+
+      // check the existing video object for each item in this array
+      if (existingVideos[video.id]) {
+        // access the key being the video id and then the url inside
+        // the value of this key and since its an array push
+        // the video url to the array
+        existingVideos[video.id].url.push(video.url);
+      } else {
+        // create a key with the id and the value being this
+        // entire object
+        existingVideos[video.id] = {
+          id,
+          title,
+          year,
+          category,
+          rating,
+          is_bookmarked,
+          is_recommended,
+          url: [video.url],
+        };
+      }
+    });
+    // extract values of the existing videos object
+    // and return an array
+    const formattedResult = Object.values(existingVideos);
+
+    res.status(200).json(formattedResult);
   } catch (error) {
-    res.status(500).json("LOL SOMETHING WENT WRONG");
+    res.status(500).json();
   }
 }
 
