@@ -15,7 +15,9 @@ export const VideoProvider = ({ children }) => {
   useEffect(() => {
     const getTrendingVideos = async () => {
       try {
-        const response = await axios.get("http://localhost:3000/movies");
+        const response = await axios.get(
+          "http://localhost:3000/videos/trending-videos"
+        );
         console.log(response);
         setTrendingVideos(response.data); // Store the fetched data in state
       } catch (err) {
