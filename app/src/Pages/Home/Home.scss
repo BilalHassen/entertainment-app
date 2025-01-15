@@ -1,10 +1,6 @@
 @use "../../styles/partials/mixins" as *;
 @use "../../styles/partials/variables" as *;
 
-.home-wrapper {
-  overflow: hidden;
-}
-
 @include desktop-small {
   .home-wrapper {
     display: flex;
@@ -14,4 +10,8 @@
 // wrapper for all content
 .content-wrapper {
   margin: 0rem 1.6rem;
+
+  @include mobile-large {
+    margin: 0rem 2rem;
+  }
 }

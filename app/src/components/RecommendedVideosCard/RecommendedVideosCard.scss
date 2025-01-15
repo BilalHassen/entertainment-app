@@ -1,3 +1,12 @@
+@use "../../../src/styles/partials/mixins" as *;
+@use "../../../src/styles/partials/variables" as *;
+
+.recommendedVideos-title {
+  margin: 2.8rem 0rem;
+  font-size: 2.5rem;
+  font-weight: 400;
+}
+
 .recommendedVideos {
   // container of videos
   display: grid;
@@ -58,5 +67,70 @@
     display: flex;
     flex-direction: column;
     gap: 0.8rem;
+  }
+}
+
+@include mobile-medium {
+  .recommendedVideos {
+    // container of videos
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: auto;
+    gap: 1.6rem;
+
+    // image of video with book mark btn
+    &__thumbnail {
+      border-radius: 4px;
+      min-width: 16.4rem;
+      height: 11rem;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      padding: 1rem;
+    }
+
+    // bookmark btn
+    &__book-btn {
+      width: 3rem;
+      height: 3rem;
+      border-radius: 100px;
+      outline: none;
+      border: none;
+      background-color: rgba(0, 0, 0, 0.5);
+    }
+
+    // all text excluding title container
+    &__type-box {
+      display: flex;
+      gap: 0.5rem;
+      align-items: center;
+    }
+    // text
+    &__category,
+    &__year,
+    &__rating {
+      color: lightgray;
+      font-size: 1.1rem;
+    }
+    // title text
+    &__title {
+      color: white;
+      font-size: 1.6rem;
+    }
+
+    // box for all text including title
+    &__text-content {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1rem 0rem;
+    }
+
+    // flex wrraper for the text box and title within textcontent wrapper
+    &__flex-wrapper {
+      display: flex;
+      flex-direction: column;
+      gap: 0.8rem;
+    }
   }
 }

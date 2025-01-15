@@ -7,7 +7,7 @@ function RecommendedVideos() {
   console.log(recommendedVideos);
   return (
     <>
-      <h1>Recommended for you</h1>
+      <h1 className="recommendedVideos-title">Recommended for you</h1>
       <section className="recommendedVideos">
         {recommendedVideos.map((video) => {
           const {
