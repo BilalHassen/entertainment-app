@@ -45,11 +45,11 @@ function RecommendedVideosCard({
                   src={category === "Movie" ? movie : tv}
                 />
                 <p className="recommendedVideos__category">{category}</p>
+                <div className="recommendedVideos__rating-box">
+                  <p className="recommendedVideos__rating">{rating}</p>
+                </div>
               </div>
               <h3 className="recommendedVideos__title">{title}</h3>
-            </div>
-            <div className="recommendedVideos__rating-box">
-              <p className="recommendedVideos__rating">{rating}</p>
             </div>
           </div>
         </div>
