@@ -4,14 +4,35 @@
 @include desktop-small {
   .home-wrapper {
     display: flex;
+    overflow: hidden;
+    min-width: 100%;
+    gap: 4rem;
+    margin-top: 4rem;
   }
 }
 
 // wrapper for all content
 .content-wrapper {
+  box-sizing: border-box;
   margin: 0rem 1.6rem;
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
 
   @include mobile-large {
     margin: 0rem 2rem;
+  }
+
+  @include tablet-medium {
+    margin: 0 3rem;
+  }
+  @include tablet-large {
+    margin: 0 5rem;
+  }
+
+  @include desktop-small {
+    width: calc(100% - 4rem);
+    margin: 0rem 4rem 0rem 0rem;
+    overflow: hidden;
   }
 }

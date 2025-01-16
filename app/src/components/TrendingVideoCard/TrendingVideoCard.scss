@@ -1,3 +1,5 @@
+@use "../../styles/partials/mixins" as *;
+
 .trendingVideos {
   &__card {
     height: 140px;
@@ -71,5 +73,18 @@
 
   &__title {
     font-size: 2rem;
+  }
+}
+
+@include desktop-small {
+  .trendingVideos {
+    &__card {
+      flex: 0 0 auto; // Prevent shrinking or growing
+      height: 230px;
+      width: 470px; // Fixed card width
+      border-radius: 4px;
+      padding: 1rem;
+      color: white;
+    }
   }
 }
