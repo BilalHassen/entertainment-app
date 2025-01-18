@@ -22,7 +22,7 @@ function RecommendedVideos() {
           } = video;
           return (
             <VideoCard
-              key={video.index}
+              key={video.id}
               category={category}
               id={id}
               is_bookmarked={is_bookmarked}
