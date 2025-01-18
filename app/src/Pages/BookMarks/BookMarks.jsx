@@ -1,10 +1,12 @@
 import React from "react";
-
+import LayOut from "@components/LayOut/LayOut";
 function BookMarks() {
   return (
-    <div>
-      <h1>BookMarks Page</h1>
-    </div>
+    <LayOut>
+      <div>
+        <h1>BookMarks Page</h1>
+      </div>
+    </LayOut>
   );
 }
 

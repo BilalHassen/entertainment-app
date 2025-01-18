@@ -1,5 +1,5 @@
 import React from "react";
-import RecommendedVideosCard from "../RecommendedVideosCard/RecommendedVideosCard";
+import VideoCard from "../VideoCard/VideoCard";
 import { useVideosContext } from "../../context/videoContext";
 
 function RecommendedVideos() {
@@ -7,8 +7,8 @@ function RecommendedVideos() {
   console.log(recommendedVideos);
   return (
     <>
-      <h1 className="recommendedVideos-title">Recommended for you</h1>
-      <section className="recommendedVideos">
+      <h1 className="videoContainer-title">Recommended for you</h1>
+      <section className="videoContainer">
         {recommendedVideos.map((video) => {
           const {
             category,
@@ -21,8 +21,8 @@ function RecommendedVideos() {
             year,
           } = video;
           return (
-            <RecommendedVideosCard
-              key={video.index}
+            <VideoCard
+              key={video.id}
               category={category}
               id={id}
               is_bookmarked={is_bookmarked}

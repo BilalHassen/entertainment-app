@@ -1,6 +1,6 @@
 import { createContext, useContext, useState, useEffect } from "react";
 import axios from "axios"; // Make sure to import axios
-import RecommendedVideos from "../components/RecommendedVideos/RecommendedVideos";
+import RecommendedVideos from "../components/VideoContainer/VideoContainer";
 
 export const videoContext = createContext();
 
