@@ -1,5 +1,6 @@
 import { createContext, useContext, useState, useEffect } from "react";
 import axios from "axios"; // Make sure to import axios
+import RecommendedVideos from "../components/RecommendedVideos/RecommendedVideos";
 
 export const videoContext = createContext();
 
@@ -11,23 +12,44 @@ export const useVideosContext = () => {
 // VideoProvider Component
 export const VideoProvider = ({ children }) => {
   const [trendingVideos, setTrendingVideos] = useState([]);
+  const [recommendedVideos, setRecommendedVideos] = useState([]);
 
   useEffect(() => {
-    const getTrendingVideos = async () => {
+    const fetchTrendingVideos = async () => {
       try {
-        const response = await axios.get("http://localhost:3000/movies");
-        console.log(response);
-        setTrendingVideos(response.data); // Store the fetched data in state
-      } catch (err) {
-        console.log("Error fetching data:", err);
+        const response = await axios.get(
+          "http://localhost:3000/videos/trending-videos"
+        );
+        setTrendingVideos(response.data);
+      } catch (error) {
+        console.error("Error fetching trending videos:", error);
       }
     };
 
-    getTrendingVideos(); // Call the function to fetch data when component mounts
+    const fetchRecommendedVideos = async () => {
+      try {
+        const response = await axios.get(
+          "http://localhost:3000/videos/recommended-videos"
+        );
+        setRecommendedVideos(response.data);
+      } catch (error) {
+        console.error("Error fetching recommended videos:", error);
+      }
+    };
+
+    fetchTrendingVideos();
+    fetchRecommendedVideos();
   }, []);
 
   return (
-    <videoContext.Provider value={{ trendingVideos, setTrendingVideos }}>
+    <videoContext.Provider
+      value={{
+        trendingVideos,
+        setTrendingVideos,
+        recommendedVideos,
+        setRecommendedVideos,
+      }}
+    >
       {children}
     </videoContext.Provider>
   );
