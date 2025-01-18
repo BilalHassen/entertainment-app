@@ -2,7 +2,10 @@ import { useState } from "react";
 import "./App.scss";
 import { VideoProvider } from "./context/videoContext";
 import Home from "./Pages/Home/Home";
-import { BrowserRouter as Router, Routes, Route } from "react-router";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import BookMarks from "./Pages/BookMarks/BookMarks";
+import Tv from "./Pages/Tv/Tv";
+import Movies from "./Pages/Movies/Movies";
 
 function App() {
   return (
@@ -11,9 +14,9 @@ function App() {
         <Router>
           <Routes>
             <Route path="/" element={<Home />} />{" "}
-            <Route path="/tv" element={<Home />} />
-            <Route path="/movies" element={<Home />} />
-            <Route path="/bookmarked" element={<Home />} />
+            <Route path="/tv" element={<Tv />} />
+            <Route path="/movies" element={<Movies />} />
+            <Route path="/bookmarks" element={<BookMarks />} />
           </Routes>
         </Router>
       </VideoProvider>
