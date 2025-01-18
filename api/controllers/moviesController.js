@@ -7,6 +7,7 @@ async function getMovies(req, res) {
       .join("thumbnails", "movies.id", "=", "thumbnails.movie_id")
       .where("movies.category", "=", "Movie")
       .select(
+        "movies.id",
         "movies.title",
         "movies.year",
         "movies.category",
@@ -16,7 +17,37 @@ async function getMovies(req, res) {
         "movies.is_recommended",
         "thumbnails.url"
       );
-    res.status(200).json(moviesResponse);
+
+    const existingMovie = {};
+
+    moviesResponse.forEach((movie) => {
+      const {
+        title,
+        year,
+        category,
+        rating,
+        is_bookmarked,
+        is_trending,
+        is_recommended,
+      } = movie;
+      if (existingMovie[movie.id]) {
+        existingMovie[movie.id].url.push(movie.url);
+      } else {
+        existingMovie[movie.id] = {
+          title,
+          year,
+          category,
+          rating,
+          is_bookmarked,
+          is_trending,
+          is_recommended,
+          url: [movie.url],
+        };
+      }
+    });
+
+    const moviesArray = Object.values(existingMovie);
+    res.status(200).json(moviesArray);
   } catch (err) {
     res.status(500).json(`LoL an error occured ${err}`);
   }
