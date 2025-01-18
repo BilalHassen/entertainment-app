@@ -1,7 +1,7 @@
 import React from "react";
 import Nav from "@components/Nav/nav";
 import Trending from "@components/Trending/Trending";
-import RecommendedVideos from "@components/RecommendedVideos/RecommendedVideos";
+import VideoContainer from "@components/VideoContainer/VideoContainer";
 import "./Home.scss";
 
 function Home() {
@@ -10,7 +10,7 @@ function Home() {
       <Nav />
       <div className="content-wrapper">
         <Trending />
-        <RecommendedVideos />
+        <VideoContainer />
       </div>
     </div>
   );
