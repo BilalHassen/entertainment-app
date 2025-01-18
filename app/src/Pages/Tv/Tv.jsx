@@ -1,10 +1,13 @@
 import React from "react";
+import LayOut from "@components/LayOut/LayOut";
 
 function Tv() {
   return (
-    <div>
-      <h1>Tv page</h1>
-    </div>
+    <LayOut>
+      <div>
+        <h1>Tv page</h1>
+      </div>
+    </LayOut>
   );
 }
 
