@@ -13,6 +13,7 @@ export const useVideosContext = () => {
 export const VideoProvider = ({ children }) => {
   const [trendingVideos, setTrendingVideos] = useState([]);
   const [recommendedVideos, setRecommendedVideos] = useState([]);
+  const [movies, setMovies] = useState([]);
 
   useEffect(() => {
     const fetchTrendingVideos = async () => {
@@ -37,8 +38,18 @@ export const VideoProvider = ({ children }) => {
       }
     };
 
+    const fetchMovies = async () => {
+      try {
+        const response = await axios.get("http://localhost:3000/movies");
+        setMovies(response.data);
+      } catch (error) {
+        console.error("Error fetching recommended videos:", error);
+      }
+    };
+
     fetchTrendingVideos();
     fetchRecommendedVideos();
+    fetchMovies();
   }, []);
 
   return (
@@ -48,6 +59,8 @@ export const VideoProvider = ({ children }) => {
         setTrendingVideos,
         recommendedVideos,
         setRecommendedVideos,
+        movies,
+        setMovies,
       }}
     >
       {children}
