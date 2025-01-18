@@ -1,5 +1,5 @@
 @use "../../styles/partials/mixins" as *;
-
+@use "../../styles/partials/variables" as *;
 .trendingVideos {
   &__card {
     height: 140px;
@@ -30,8 +30,13 @@
     outline: none;
     border: none;
     background-color: rgba(0, 0, 0, 0.5);
-
     margin-left: auto;
+    cursor: pointer;
+    transition: 0.3s ease-in-out;
+
+    &:hover {
+      background-color: $steel-blue;
+    }
   }
 
   &__bookmark-icon {
