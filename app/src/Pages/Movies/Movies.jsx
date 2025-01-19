@@ -1,6 +1,7 @@
 import React from "react";
 import { useVideosContext } from "../../context/videoContext";
-import RecommendedVideosCard from "../../components/VideoCard/VideoCard";
+import VideoCard from "../../components/VideoCard/VideoCard";
+import VideoContainer from "../../components/VideoContainer/VideoContainer";
 import LayOut from "../../components/LayOut/LayOut";
 import "./movies.scss";
 function Movies() {
@@ -10,33 +11,7 @@ function Movies() {
   return (
     <>
       <LayOut>
-        <section className="recommendedVideos">
-          {movies.map((video) => {
-            const {
-              category,
-              id,
-              is_bookmarked,
-              is_recommended,
-              rating,
-              title,
-              url,
-              year,
-            } = video;
-            return (
-              <RecommendedVideosCard
-                key={video.index}
-                category={category}
-                id={id}
-                is_bookmarked={is_bookmarked}
-                is_recommended={is_recommended}
-                rating={rating}
-                title={title}
-                year={year}
-                url={url}
-              />
-            );
-          })}
-        </section>
+        <VideoContainer data={movies} title="Movies" />
       </LayOut>
     </>
   );

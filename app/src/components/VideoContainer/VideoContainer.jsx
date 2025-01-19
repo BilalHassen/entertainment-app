@@ -2,14 +2,12 @@ import React from "react";
 import VideoCard from "../VideoCard/VideoCard";
 import { useVideosContext } from "../../context/videoContext";
 
-function RecommendedVideos() {
-  const { recommendedVideos } = useVideosContext(); // Access the context
-  console.log(recommendedVideos);
+function VideoContainer({ data, title }) {
   return (
     <>
-      <h1 className="videoContainer-title">Recommended for you</h1>
+      <h1 className="videoContainer-title">{title}</h1>
       <section className="videoContainer">
-        {recommendedVideos.map((video) => {
+        {data.map((video) => {
           const {
             category,
             id,
@@ -39,4 +37,4 @@ function RecommendedVideos() {
   );
 }
 
-export default RecommendedVideos;
+export default VideoContainer;
