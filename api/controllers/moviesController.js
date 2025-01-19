@@ -1,5 +1,7 @@
 const knex = require("knex")(require("../knexfile"));
-console.log(knex);
+const {
+  collectDuplicateThumbnails,
+} = require("../helper/collectDuplicateThumbnails");
 
 async function getMovies(req, res) {
   try {
@@ -18,36 +20,8 @@ async function getMovies(req, res) {
         "thumbnails.url"
       );
 
-    const existingMovie = {};
-
-    moviesResponse.forEach((movie) => {
-      const {
-        title,
-        year,
-        category,
-        rating,
-        is_bookmarked,
-        is_trending,
-        is_recommended,
-      } = movie;
-      if (existingMovie[movie.id]) {
-        existingMovie[movie.id].url.push(movie.url);
-      } else {
-        existingMovie[movie.id] = {
-          title,
-          year,
-          category,
-          rating,
-          is_bookmarked,
-          is_trending,
-          is_recommended,
-          url: [movie.url],
-        };
-      }
-    });
-
-    const moviesArray = Object.values(existingMovie);
-    res.status(200).json(moviesArray);
+    const formattedMovies = collectDuplicateThumbnails(moviesResponse);
+    res.status(200).json(formattedMovies);
   } catch (err) {
     res.status(500).json(`LoL an error occured ${err}`);
   }
