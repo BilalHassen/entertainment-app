@@ -3,7 +3,7 @@ const {
   collectDuplicateThumbnails,
 } = require("../helper/collectDuplicateThumbnails");
 
-async function getTvShows(req, res) {
+async function getBookmarkVideos(req, res) {
   try {
     const bookmarkResponse = await knex("movies")
       .join("thumbnails", "movies.id", "=", "thumbnails.movie_id")
@@ -29,5 +29,5 @@ async function getTvShows(req, res) {
 }
 
 module.exports = {
-  getTvShows,
+  getBookmarkVideos,
 };
