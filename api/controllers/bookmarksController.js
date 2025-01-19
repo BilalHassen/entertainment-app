@@ -7,7 +7,7 @@ async function getBookmarkVideos(req, res) {
   try {
     const bookmarkResponse = await knex("movies")
       .join("thumbnails", "movies.id", "=", "thumbnails.movie_id")
-      .where("movies.is_recommended", "=", true)
+      .where("movies.is_bookmarked", "=", true)
       .select(
         "movies.id",
         "movies.title",
