@@ -15,6 +15,7 @@ export const VideoProvider = ({ children }) => {
   const [recommendedVideos, setRecommendedVideos] = useState([]);
   const [movies, setMovies] = useState([]);
   const [tvShows, setTvShows] = useState([]);
+  const [bookmarks, setBookMarks] = useState([]);
 
   useEffect(() => {
     const fetchTrendingVideos = async () => {
@@ -57,10 +58,20 @@ export const VideoProvider = ({ children }) => {
       }
     };
 
+    const fetchBookMarkVideos = async () => {
+      try {
+        const response = await axios.get("http://localhost:3000/bookmarks");
+        setBookMarks(response.data);
+      } catch (error) {
+        console.error("Error fetching Book marked videos:", error);
+      }
+    };
+
     fetchTrendingVideos();
     fetchRecommendedVideos();
     fetchMovies();
     fetchTvShows();
+    fetchBookMarkVideos();
   }, []);
 
   return (
@@ -74,6 +85,8 @@ export const VideoProvider = ({ children }) => {
         setMovies,
         tvShows,
         setTvShows,
+        bookmarks,
+        setBookMarks,
       }}
     >
       {children}
