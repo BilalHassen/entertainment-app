@@ -1,5 +1,6 @@
 import React from "react";
 import VideoCard from "../VideoCard/VideoCard";
+
 import { useVideosContext } from "../../context/videoContext";
 
 function VideoContainer({ data, title }) {
@@ -18,9 +19,10 @@ function VideoContainer({ data, title }) {
             url,
             year,
           } = video;
+          const uniqueId = crypto.randomUUID();
           return (
             <VideoCard
-              key={video.id}
+              key={uniqueId}
               category={category}
               id={id}
               is_bookmarked={is_bookmarked}
