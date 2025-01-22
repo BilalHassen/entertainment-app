@@ -15,8 +15,16 @@ function BookMarks() {
 
   return (
     <LayOut>
-      <VideoContainer data={bookmarkMovies} title="Bookmarked Movies" />
-      <VideoContainer data={bookmarkTvSeries} title="Bookmarked TV Series" />
+      <VideoContainer
+        data={bookmarkMovies}
+        title="Bookmarked Movies"
+        bookmarkedPage={true}
+      />
+      <VideoContainer
+        data={bookmarkTvSeries}
+        title="Bookmarked TV Series"
+        bookmarkedPage={true}
+      />
     </LayOut>
   );
 }

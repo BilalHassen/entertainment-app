@@ -6,6 +6,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import BookMarks from "./Pages/BookMarks/BookMarks";
 import Tv from "./Pages/Tv/Tv";
 import Movies from "./Pages/Movies/Movies";
+import { use } from "react";
 
 function App() {
   return (

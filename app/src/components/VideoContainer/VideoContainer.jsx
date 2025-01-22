@@ -3,11 +3,15 @@ import VideoCard from "../VideoCard/VideoCard";
 
 import { useVideosContext } from "../../context/videoContext";
 
-function VideoContainer({ data, title }) {
+function VideoContainer({ data, title, bookmarkedPage }) {
+  console.log(bookmarkedPage);
+
   return (
     <>
       <h1 className="videoContainer-title">{title}</h1>
-      <section className="videoContainer">
+      <section
+        className={`${bookmarkedPage ? "specialClass" : "videoContainer "}`}
+      >
         {data.map((video) => {
           const {
             category,

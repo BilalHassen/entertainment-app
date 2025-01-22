@@ -1,4 +1,5 @@
 import React from "react";
+import { useState } from "react";
 import Nav from "@components/Nav/nav";
 import Trending from "@components/Trending/Trending";
 import VideoContainer from "@components/VideoContainer/VideoContainer";
@@ -10,10 +11,12 @@ function Home() {
   const { recommendedVideos } = useVideosContext();
 
   return (
-    <LayOut>
-      <Trending />
-      <VideoContainer data={recommendedVideos} title="Recommended for you" />
-    </LayOut>
+    <>
+      <LayOut>
+        <Trending />
+        <VideoContainer data={recommendedVideos} title="Recommended for you" />
+      </LayOut>
+    </>
   );
 }
 
