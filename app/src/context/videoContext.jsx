@@ -1,6 +1,6 @@
 import { createContext, useContext, useState, useEffect } from "react";
 import axios from "axios"; // Make sure to import axios
-import RecommendedVideos from "../components/RecommendedVideos/RecommendedVideos";
+import RecommendedVideos from "../components/VideoContainer/VideoContainer";
 
 export const videoContext = createContext();
 
@@ -13,6 +13,9 @@ export const useVideosContext = () => {
 export const VideoProvider = ({ children }) => {
   const [trendingVideos, setTrendingVideos] = useState([]);
   const [recommendedVideos, setRecommendedVideos] = useState([]);
+  const [movies, setMovies] = useState([]);
+  const [tvShows, setTvShows] = useState([]);
+  const [bookmarks, setBookMarks] = useState([]);
 
   useEffect(() => {
     const fetchTrendingVideos = async () => {
@@ -37,8 +40,38 @@ export const VideoProvider = ({ children }) => {
       }
     };
 
+    const fetchMovies = async () => {
+      try {
+        const response = await axios.get("http://localhost:3000/movies");
+        setMovies(response.data);
+      } catch (error) {
+        console.error("Error fetching movies:", error);
+      }
+    };
+
+    const fetchTvShows = async () => {
+      try {
+        const response = await axios.get("http://localhost:3000/tv");
+        setTvShows(response.data);
+      } catch (error) {
+        console.error("Error fetching Tv shows:", error);
+      }
+    };
+
+    const fetchBookMarkVideos = async () => {
+      try {
+        const response = await axios.get("http://localhost:3000/bookmarks");
+        setBookMarks(response.data);
+      } catch (error) {
+        console.error("Error fetching Book marked videos:", error);
+      }
+    };
+
     fetchTrendingVideos();
     fetchRecommendedVideos();
+    fetchMovies();
+    fetchTvShows();
+    fetchBookMarkVideos();
   }, []);
 
   return (
@@ -48,6 +81,12 @@ export const VideoProvider = ({ children }) => {
         setTrendingVideos,
         recommendedVideos,
         setRecommendedVideos,
+        movies,
+        setMovies,
+        tvShows,
+        setTvShows,
+        bookmarks,
+        setBookMarks,
       }}
     >
       {children}

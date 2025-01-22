@@ -24,9 +24,10 @@ function Trending() {
               url,
               year,
             } = video;
+            const uniqueId = crypto.randomUUID();
             return (
               <TrendingVideoCard
-                key={id}
+                key={uniqueId}
                 category={category}
                 bookmarked={is_bookmarked}
                 trending={is_trending}

@@ -1,15 +1,18 @@
 import React from "react";
-import RecommendedVideosCard from "../RecommendedVideosCard/RecommendedVideosCard";
+import VideoCard from "../VideoCard/VideoCard";
+
 import { useVideosContext } from "../../context/videoContext";
 
-function RecommendedVideos() {
-  const { recommendedVideos } = useVideosContext(); // Access the context
-  console.log(recommendedVideos);
+function VideoContainer({ data, title, bookmarkedPage }) {
+  console.log(bookmarkedPage);
+
   return (
     <>
-      <h1 className="recommendedVideos-title">Recommended for you</h1>
-      <section className="recommendedVideos">
-        {recommendedVideos.map((video) => {
+      <h1 className="videoContainer-title">{title}</h1>
+      <section
+        className={`${bookmarkedPage ? "specialClass" : "videoContainer "}`}
+      >
+        {data.map((video) => {
           const {
             category,
             id,
@@ -20,9 +23,10 @@ function RecommendedVideos() {
             url,
             year,
           } = video;
+          const uniqueId = crypto.randomUUID();
           return (
-            <RecommendedVideosCard
-              key={video.index}
+            <VideoCard
+              key={uniqueId}
               category={category}
               id={id}
               is_bookmarked={is_bookmarked}
@@ -39,4 +43,4 @@ function RecommendedVideos() {
   );
 }
 
-export default RecommendedVideos;
+export default VideoContainer;

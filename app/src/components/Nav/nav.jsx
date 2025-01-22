@@ -3,8 +3,9 @@ import DynamicImage from "../DynamicImage/DynamicImage";
 import { useState, useEffect } from "react";
 import useWindowWidth from "../../hooks/useWindowWidth";
 import React from "react";
+import { Link } from "react-router-dom";
 
-export default function () {
+export default function Nav() {
   const width = useWindowWidth();
 
   // react fragment is doesnt affect layout.
@@ -17,26 +18,34 @@ export default function () {
       >
         <DynamicImage src="/assets/logo.svg" alt="main-logo" name="nav__logo" />
         <div className="nav__box">
-          <DynamicImage
-            src="/assets/icon-nav-home.svg"
-            alt="icon for home"
-            name="nav__home-icon"
-          />
-          <DynamicImage
-            src="/assets/icon-nav-movies.svg"
-            alt="icon for movies"
-            name="nav__movies-icon"
-          />
-          <DynamicImage
-            src="/assets/icon-nav-tv-series.svg"
-            alt="icon for tv"
-            name="nav__tv-icon"
-          />
-          <DynamicImage
-            src="/assets/icon-nav-bookmark.svg"
-            alt="icon for bookmarks"
-            name="nav__bookmark-icon"
-          />
+          <Link to="/">
+            <DynamicImage
+              src="/assets/icon-nav-home.svg"
+              alt="icon for home"
+              name="nav__home-icon"
+            />
+          </Link>
+          <Link to="/movies">
+            <DynamicImage
+              src="/assets/icon-nav-movies.svg"
+              alt="icon for movies"
+              name="nav__movies-icon"
+            />
+          </Link>
+          <Link to="/tv">
+            <DynamicImage
+              src="/assets/icon-nav-tv-series.svg"
+              alt="icon for tv"
+              name="nav__tv-icon"
+            />
+          </Link>
+          <Link to="/bookmarks">
+            <DynamicImage
+              src="/assets/icon-nav-bookmark.svg"
+              alt="icon for bookmarks"
+              name="nav__bookmark-icon"
+            />
+          </Link>
         </div>
       </Wrapper>
 

@@ -7,7 +7,7 @@
   font-weight: 400;
 }
 
-.recommendedVideos {
+.videoContainer {
   // container of videos
   display: grid;
   grid-template-columns: repeat(2, 1fr);
@@ -73,7 +73,7 @@
 }
 
 @include mobile-medium {
-  .recommendedVideos {
+  .videoContainer {
     // container of videos
     display: grid;
     grid-template-columns: repeat(2, 1fr);
@@ -136,7 +136,7 @@
 }
 
 @include mobile-large {
-  .recommendedVideos {
+  .videoContainer {
     // container of videos
     display: grid;
     grid-template-columns: repeat(2, 1fr);
@@ -159,7 +159,7 @@
 }
 
 @include tablet-small {
-  .recommendedVideos {
+  .videoContainer {
     // container of videos
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -180,7 +180,7 @@
 }
 
 @include tablet-large {
-  .recommendedVideos {
+  .videoContainer {
     // container of videos
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -199,7 +199,7 @@
 }
 
 @include desktop-small {
-  .recommendedVideos {
+  .videoContainer {
     width: 100%;
     // container of videos
     display: grid;
