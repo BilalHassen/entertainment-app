@@ -2,5 +2,53 @@
 @use "../../styles/partials/variables" as *;
 
 .auth {
+  padding: 3rem 1.6rem;
   background-color: $midnight-blue;
+  border-radius: 4px;
+}
+
+.authForm {
+  display: flex;
+  flex-direction: column;
+  gap: 4rem;
+
+  //   &__title {
+  //     margin: 0.5rem 0rem;
+  //   }
+
+  &__email-box,
+  &__password-box,
+  &__repassword-box {
+    display: flex;
+    flex-direction: column;
+    border-bottom: 1px solid lightgray;
+  }
+
+  &__email,
+  &__password,
+  &__repassword {
+    background-color: $midnight-blue;
+    border: none;
+    height: 4rem;
+    outline: none;
+
+    &::placeholder {
+      position: absolute;
+      bottom: 2.4rem;
+      color: rgb(130, 130, 130);
+      font-size: 1.6rem;
+      padding-left: 1rem;
+      text-align: start;
+    }
+  }
+
+  &__button {
+    all: unset;
+    background-color: $red;
+    border-radius: 4px;
+    height: 4.8rem;
+    font-size: 1.6rem;
+    text-align: center;
+    color: white;
+  }
 }
