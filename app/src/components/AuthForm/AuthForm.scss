@@ -8,20 +8,26 @@
 }
 
 .authForm {
-  display: flex;
-  flex-direction: column;
-  gap: 4rem;
-
   //   &__title {
   //     margin: 0.5rem 0rem;
   //   }
+  display: flex;
+  gap: 4rem;
+  flex-direction: column;
+
+  &__error {
+    color: red;
+    font-size: 1.3rem;
+    margin-top: 0.5rem;
+  }
 
   &__email-box,
   &__password-box,
   &__repassword-box {
     display: flex;
     flex-direction: column;
-    border-bottom: 1px solid lightgray;
+
+    color: white;
   }
 
   &__email,
@@ -31,6 +37,9 @@
     border: none;
     height: 4rem;
     outline: none;
+    color: white;
+    font-size: 2rem;
+    border-bottom: 1px solid lightgray;
 
     &::placeholder {
       position: absolute;
@@ -51,4 +60,8 @@
     text-align: center;
     color: white;
   }
+}
+
+.no-err {
+  display: none;
 }

@@ -1,43 +1,85 @@
 import React, { useEffect } from "react";
 import "./AuthForm.scss";
 import { useState } from "react";
+import { use } from "react";
 
 function AuthForm({ isUser }) {
-  const [formData, setFormData] = useState({
+  const [loginFormData, setLoginFormData] = useState({
     email: "",
     password: "",
   });
 
-  const [loginFormData, setLoginFormData] = useState({
+  const [formData, setFormData] = useState({
     email: "",
     password: "",
     repeatPassword: "",
   });
 
+  const [error, setError] = useState({});
+
   const handleForm = (e) => {
+    // updating the form state
     const { name } = e.target;
     if (isUser) {
-      setFormData((prevData) => ({
+      // maintain the previos state value
+      // so other values in the object wont get lost
+      // when updating certain parts
+      setLoginFormData((prevData) => ({
         ...prevData,
         [name]: e.target.value,
       }));
     } else {
-      setLoginFormData((prevData) => ({
+      setFormData((prevData) => ({
         ...prevData,
         [name]: e.target.value,
       }));
     }
   };
 
+  const handleFormValidation = (e) => {
+    // object to hold error values
+    const isErrors = {};
+
+    const { email, password } = formData;
+
+    if (!email) {
+      isErrors["email"] = "email is required";
+    }
+
+    if (!password) {
+      isErrors["password"] = "password is required";
+    } else if (password.length < 8) {
+      isErrors["password"] = "password must be longer than 8 characters";
+    }
+
+    if (!isUser && formData.repeatPassword !== password) {
+      isErrors["repeatPassword"] = "passwords must match";
+    }
+
+    if (!formData.repeatPassword) {
+      isErrors["repeatPassword"] = "passwords must match";
+    }
+
+    console.log(isErrors);
+    setError(isErrors);
+    return isErrors;
+  };
+
+  const handleFormSubmit = (e) => {
+    e.preventDefault();
+    handleFormValidation();
+  };
+
   useEffect(() => {
-    console.log(formData);
-  }, [formData]);
+    console.log(error.password);
+  }, [error]);
 
   return (
-    <form className="authForm">
-      <h1 className="authForm__title">{isUser ? "Login" : "Sign up"}</h1>
+    <form className="authForm" onSubmit={handleFormSubmit}>
+      <h1 className="authForm__title">{isUser ? "Login" : "Sign Up"}</h1>
 
       {/* Email Field */}
+
       <div className="authForm__email-box">
         <input
           className="authForm__email"
@@ -46,10 +88,17 @@ function AuthForm({ isUser }) {
           name="email"
           aria-label="Email"
           placeholder="Email"
-          value={formData.email}
-          required
+          // set the state as the value so the element
+          // will reflect the updated state value
+          // two way binding
+          value={isUser ? loginFormData.email : formData.email}
+          // detects change on element and also sets the value
+          // of the element to the state value
           onChange={handleForm}
         />
+        <p className={error.email ? "authForm__error" : "no-err"}>
+          {error.email}
+        </p>
       </div>
 
       {/* Password Field */}
@@ -61,10 +110,12 @@ function AuthForm({ isUser }) {
           id="password"
           aria-label="Password"
           placeholder="Password"
-          value={formData.password}
+          value={isUser ? loginFormData.password : formData.password}
           onChange={handleForm}
-          required
         />
+        <p className={error.password ? "authForm__error" : "no-err"}>
+          {error.password}
+        </p>
       </div>
 
       {/* Repeat Password Field */}
@@ -77,10 +128,12 @@ function AuthForm({ isUser }) {
             id="repeatPassword"
             aria-label="Repeat Password"
             placeholder="Repeat Password"
-            value={loginFormData.repeatPassword}
+            value={formData.repeatPassword}
             onChange={handleForm}
-            required
           />
+          <p className={error.repeatPassword ? "authForm__error" : "no-err"}>
+            {error.repeatPassword}
+          </p>
         </div>
       )}
 
