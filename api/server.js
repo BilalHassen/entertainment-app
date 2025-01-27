@@ -3,12 +3,14 @@ const app = express();
 const cors = require("cors");
 
 app.use(cors());
+app.use(express.json());
 
 // get the route handlers
 const videos = require("./routes/videos");
 const movies = require("./routes/movies");
 const tvShows = require("./routes/tv");
 const bookmarks = require("./routes/bookmarks");
+const user = require("./routes/user");
 
 // mount the videos functions to the /videos route
 app.use("/videos", videos);
@@ -21,6 +23,8 @@ app.use("/tv", tvShows);
 
 // mount the bookmark route handler functions to the /bookmark route
 app.use("/bookmarks", bookmarks);
+
+app.use("/user", user);
 
 app.get("/", (req, res) => {
   res.status(200).json("Welcome to the API"); // Sets status to 201 (Created)
