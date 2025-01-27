@@ -4,15 +4,10 @@ import { useState } from "react";
 import { use } from "react";
 
 function AuthForm({ isUser }) {
-  const [loginFormData, setLoginFormData] = useState({
-    email: "",
-    password: "",
-  });
-
   const [formData, setFormData] = useState({
     email: "",
     password: "",
-    repeatPassword: "",
+    repeatPassword: isUser ? "" : null,
   });
 
   const [error, setError] = useState({});
@@ -20,43 +15,37 @@ function AuthForm({ isUser }) {
   const handleForm = (e) => {
     // updating the form state
     const { name } = e.target;
-    if (isUser) {
-      // maintain the previos state value
-      // so other values in the object wont get lost
-      // when updating certain parts
-      setLoginFormData((prevData) => ({
-        ...prevData,
-        [name]: e.target.value,
-      }));
-    } else {
-      setFormData((prevData) => ({
-        ...prevData,
-        [name]: e.target.value,
-      }));
-    }
+
+    // maintain the previos state value
+    // so other values in the object wont get lost
+    // when updating certain parts
+    setFormData((prevData) => ({
+      ...prevData,
+      [name]: e.target.value,
+    }));
   };
 
   const handleFormValidation = (e) => {
     // object to hold error values
     const isErrors = {};
 
-    const { email, password } = formData;
+    const { email, password, repeatPassword } = formData;
 
-    if (!email) {
+    if (!email.trim()) {
       isErrors["email"] = "email is required";
     }
 
-    if (!password) {
+    if (!password.trim()) {
       isErrors["password"] = "password is required";
     } else if (password.length < 8) {
       isErrors["password"] = "password must be longer than 8 characters";
     }
 
-    if (!isUser && formData.repeatPassword !== password) {
+    if (!isUser && repeatPassword.trim() !== password.trim()) {
       isErrors["repeatPassword"] = "passwords must match";
     }
 
-    if (!formData.repeatPassword) {
+    if (!isUser && !repeatPassword.trim()) {
       isErrors["repeatPassword"] = "passwords must match";
     }
 
@@ -71,7 +60,7 @@ function AuthForm({ isUser }) {
   };
 
   useEffect(() => {
-    console.log(error.password);
+    console.log(formData);
   }, [error]);
 
   return (
@@ -91,7 +80,7 @@ function AuthForm({ isUser }) {
           // set the state as the value so the element
           // will reflect the updated state value
           // two way binding
-          value={isUser ? loginFormData.email : formData.email}
+          value={formData.email}
           // detects change on element and also sets the value
           // of the element to the state value
           onChange={handleForm}
@@ -110,7 +99,7 @@ function AuthForm({ isUser }) {
           id="password"
           aria-label="Password"
           placeholder="Password"
-          value={isUser ? loginFormData.password : formData.password}
+          value={formData.password}
           onChange={handleForm}
         />
         <p className={error.password ? "authForm__error" : "no-err"}>
