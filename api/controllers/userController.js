@@ -1,18 +1,49 @@
 const knex = require("knex")(require("../knexfile"));
+const bcrypt = require("bcrypt");
 
 async function HandleUserSignUp(req, res) {
+  // get the formdata from the request body
   const { email, password } = req.body;
+  let isErrors = {};
   try {
+    // Validate email
+    if (!email.trim()) {
+      isErrors["email"] = "Email is required";
+    } else if (!/^\S+@\S+\.\S+$/.test(email)) {
+      isErrors["email"] = "Invalid email format";
+    }
+
+    // Validate password
+    if (!password.trim()) {
+      isErrors["password"] = "Password is required";
+    } else if (password.length < 8) {
+      isErrors["password"] = "Password must be longer than 8 characters";
+    }
+
+    // If there are validation errors, send the response
+    if (Object.keys(isErrors).length > 0) {
+      return res.status(400).json({ errors: isErrors });
+    }
+
+    // queryt the database to check if the email exists
     const userResponse = await knex("users").where("email", "=", email);
 
+    // check if the user table already has this email
     if (userResponse.length > 0) {
       throw Error("Email already in use");
     } else {
-      await knex("users").insert({ email, password });
+      // random string of characters added to the user password before its added
+      const salt = await bcrypt.genSalt(10);
+      const hash = await bcrypt.hash(password, salt);
+
+      // insert the email and hashed password
+      await knex("users").insert({ email, password: hash });
+      // send a 201 created response with a json object
       res.status(201).json({ message: "User added successfully" });
     }
   } catch (err) {
     console.error(err); // Log the error for debugging
+    // send a bad request error
     res.status(400).json({ message: err.message });
   }
 }
