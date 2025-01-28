@@ -7,7 +7,7 @@ function AuthForm({ isUser }) {
   const [formData, setFormData] = useState({
     email: "",
     password: "",
-    repeatPassword: isUser ? "" : null,
+    repeatPassword: "",
   });
 
   const [error, setError] = useState({});
@@ -56,6 +56,7 @@ function AuthForm({ isUser }) {
 
   const handleFormSubmit = (e) => {
     e.preventDefault();
+    console.log(formData);
     handleFormValidation();
   };
 

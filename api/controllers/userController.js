@@ -1,5 +1,12 @@
 const knex = require("knex")(require("../knexfile"));
 const bcrypt = require("bcrypt");
+const jwt = require("jsonwebtoken");
+
+const createToken = (id) => {
+  return jwt.sign({ id: id }, process.env.SECRET, {
+    expiresIn: "3d",
+  });
+};
 
 async function HandleUserSignUp(req, res) {
   // get the formdata from the request body
@@ -38,8 +45,15 @@ async function HandleUserSignUp(req, res) {
 
       // insert the email and hashed password
       await knex("users").insert({ email, password: hash });
+      const userId = await knex("users")
+        .where("email", "=", email)
+        .select("users.id");
+      console.log("userid:", userId);
+      // call the create token function 
+      const token = createToken(userId[0].id);
+
       // send a 201 created response with a json object
-      res.status(201).json({ message: "User added successfully" });
+      res.status(201).json({ email: email, token: token });
     }
   } catch (err) {
     console.error(err); // Log the error for debugging
