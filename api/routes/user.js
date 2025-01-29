@@ -3,7 +3,7 @@
 const router = require("express").Router();
 const userController = require("../controllers/userController");
 
-router.route("/").post(userController.HandleUserSignUp);
-
+router.route("/signup").post(userController.handleUserSignUp);
+router.route("/signin").post(userController.handleUserSignIn);
 // use node module to export the route
 module.exports = router;
