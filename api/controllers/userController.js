@@ -2,6 +2,8 @@ const knex = require("knex")(require("../knexfile"));
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 
+// function to create jwt token
+// pass in the user id, secret and expiration time of the token
 const createToken = (id) => {
   return jwt.sign({ id: id }, process.env.SECRET, {
     expiresIn: "3d",
@@ -39,17 +41,21 @@ async function handleUserSignUp(req, res) {
     if (userResponse.length > 0) {
       throw Error("Email already in use");
     } else {
-      // random string of characters added to the user password before its added
+      // make sure passwords arent the same
       const salt = await bcrypt.genSalt(10);
+
+      // generate a secret code password
       const hash = await bcrypt.hash(password, salt);
 
       // insert the email and hashed password
       await knex("users").insert({ email, password: hash });
+      // query the database again get the userId to help
+      // identify the user
       const userId = await knex("users")
         .where("email", "=", email)
         .select("users.id");
-      console.log("userid:", userId);
-      // call the create token function
+
+      // call the create token function and pass in the users id
       const token = createToken(userId[0].id);
 
       // send a 201 created response with a json object
@@ -94,6 +100,7 @@ async function handleUserSignIn(req, res) {
     if (userResponse.length === 1) {
       const existingUser = userResponse[0];
 
+      // check if the passwords match
       const match = await bcrypt.compare(password, existingUser.password);
 
       if (!match) {
