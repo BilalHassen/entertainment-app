@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import "./AuthForm.scss";
 import { useState } from "react";
 import { use } from "react";
+import axios from "axios";
 
 function AuthForm({ isUser }) {
   const [formData, setFormData] = useState({
@@ -54,7 +55,7 @@ function AuthForm({ isUser }) {
     return isErrors;
   };
 
-  const handleFormSubmit = (e) => {
+  const handleFormSubmit = async (e) => {
     e.preventDefault();
     console.log(formData);
     handleFormValidation();
@@ -128,9 +129,14 @@ function AuthForm({ isUser }) {
       )}
 
       {/* Submit Button */}
-      <button className="authForm__button" type="submit">
-        Register
-      </button>
+      <div className="authForm__button-wrapper">
+        <button className="authForm__button" type="submit">
+          Create an account
+        </button>
+        <p className="authForm__text">
+          Already have an account? <span className="red">Login</span>
+        </p>
+      </div>
     </form>
   );
 }

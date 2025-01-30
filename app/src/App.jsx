@@ -3,10 +3,12 @@ import "./App.scss";
 import { VideoProvider } from "./context/videoContext";
 import Home from "./Pages/Home/Home";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { Navigate } from "react-router-dom";
 import BookMarks from "./Pages/BookMarks/BookMarks";
 import Tv from "./Pages/Tv/Tv";
 import Movies from "./Pages/Movies/Movies";
-import Auth from "./Pages/Auth/Auth";
+import SignIn from "./Pages/SignIn/SignIn";
+import SignUp from "./Pages/SignUp/SignUp";
 
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -24,9 +26,12 @@ function App() {
           </Router>
         </VideoProvider>
       ) : (
-        <div className="auth-wrapper">
-          <Auth />
-        </div>
+        <Router>
+          <Routes>
+            <Route path="/signin" element={<SignIn />} />
+            <Route path="/signup" element={<SignUp />} />
+          </Routes>
+        </Router>
       )}
     </>
   );
