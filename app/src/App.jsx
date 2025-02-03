@@ -9,6 +9,7 @@ import Tv from "./Pages/Tv/Tv";
 import Movies from "./Pages/Movies/Movies";
 import SignIn from "./Pages/SignIn/SignIn";
 import SignUp from "./Pages/SignUp/SignUp";
+// import LogOut from "./components/LogOut/LogOut";
 
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);

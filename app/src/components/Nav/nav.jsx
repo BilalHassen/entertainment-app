@@ -5,7 +5,7 @@ import useWindowWidth from "../../hooks/useWindowWidth";
 import React from "react";
 import { Link } from "react-router-dom";
 
-export default function Nav() {
+export default function Nav({ openModal }) {
   const width = useWindowWidth();
 
   // react fragment is doesnt affect layout.
@@ -49,11 +49,13 @@ export default function Nav() {
         </div>
       </Wrapper>
 
-      <DynamicImage
-        src="/assets/image-avatar.png"
-        alt="icon for avatar"
-        name="nav__avatar"
-      />
+      <div onClick={openModal} className="nav__avatar-wrapper">
+        <DynamicImage
+          src="/assets/image-avatar.png"
+          alt="icon for avatar"
+          name="nav__avatar"
+        />
+      </div>
     </nav>
   );
 }

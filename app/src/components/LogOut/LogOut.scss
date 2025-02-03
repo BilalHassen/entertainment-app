@@ -1,0 +1,55 @@
+@use "../../styles/partials/mixins" as *;
+@use "../../styles/partials/variables" as *;
+
+.logout {
+  padding: 3.5rem 1.6rem;
+  background-color: $midnight-blue;
+  border-radius: 4px;
+  margin: 0 1.6rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 4rem;
+  width: 100%;
+  max-width: 400px;
+
+  &__title {
+    font-size: 3rem;
+  }
+
+  &__info {
+    color: $white;
+    font-size: 1.6rem;
+    text-align: center;
+  }
+
+  &__buttons {
+    display: flex;
+    gap: 2rem;
+    width: 100%;
+    justify-content: center;
+  }
+
+  &__btn {
+    all: unset;
+    text-align: center;
+    font-size: 1.2rem;
+    color: white;
+    height: 3.5rem;
+    width: 50%;
+    background-color: $red;
+    border-radius: 4px;
+  }
+
+  &__cancel-btn {
+    all: unset;
+    text-align: center;
+    font-size: 1.2rem;
+    color: white;
+    height: 3.5rem;
+    width: 50%;
+    background-color: $steel-blue;
+    border-radius: 4px;
+  }
+}
