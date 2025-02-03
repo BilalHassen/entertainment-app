@@ -28,7 +28,7 @@ export default function LayOut({ children }) {
         className="logout-modal" // Custom class for modal content
         overlayClassName="logout-overlay"
       >
-        <LogOut />
+        <LogOut closeModal={closeModal} />
       </Modal>
     </div>
   );

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "./LogOut.scss";
 
-export default function LogOut() {
+export default function LogOut({ closeModal }) {
   return (
     <div className="logout">
       <h1 className="logout__title">Logout</h1>
@@ -9,7 +9,9 @@ export default function LogOut() {
 
       <div className="logout__buttons">
         <button className="logout__btn">Sign out</button>
-        <button className="logout__cancel-btn">Cancel</button>
+        <button onClick={closeModal} className="logout__cancel-btn">
+          Cancel
+        </button>
       </div>
     </div>
   );
