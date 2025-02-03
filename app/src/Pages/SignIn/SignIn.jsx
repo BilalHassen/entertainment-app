@@ -5,7 +5,7 @@ function SignIn() {
   return (
     <div className="auth-wrapper">
       <main className="auth">
-        <AuthForm isUser={false} />
+        <AuthForm isUser={true} url={"http://localhost:3000/user/signin"} />
       </main>
     </div>
   );

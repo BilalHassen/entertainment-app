@@ -74,6 +74,9 @@
     font-size: 1.3rem;
     color: $white;
   }
+  &__existing-user-err {
+    color: $red;
+  }
 }
 
 .no-err {

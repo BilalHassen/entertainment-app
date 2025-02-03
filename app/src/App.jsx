@@ -14,25 +14,18 @@ function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   return (
     <>
-      {isAuthenticated ? (
-        <VideoProvider>
-          <Router>
-            <Routes>
-              <Route path="/" element={<Home />} />{" "}
-              <Route path="/tv" element={<Tv />} />
-              <Route path="/movies" element={<Movies />} />
-              <Route path="/bookmarks" element={<BookMarks />} />
-            </Routes>
-          </Router>
-        </VideoProvider>
-      ) : (
+      <VideoProvider>
         <Router>
           <Routes>
+            <Route path="/" element={<Home />} />{" "}
+            <Route path="/tv" element={<Tv />} />
+            <Route path="/movies" element={<Movies />} />
+            <Route path="/bookmarks" element={<BookMarks />} />
             <Route path="/signin" element={<SignIn />} />
             <Route path="/signup" element={<SignUp />} />
           </Routes>
         </Router>
-      )}
+      </VideoProvider>
     </>
   );
 }

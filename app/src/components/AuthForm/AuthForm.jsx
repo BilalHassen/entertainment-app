@@ -3,15 +3,20 @@ import "./AuthForm.scss";
 import { useState } from "react";
 import { use } from "react";
 import axios from "axios";
+import { useAuthContext } from "../../hooks/useAuthContext";
 
-function AuthForm({ isUser }) {
+function AuthForm({ isUser, url }) {
   const [formData, setFormData] = useState({
     email: "",
     password: "",
     repeatPassword: "",
   });
+  const [formError, setFormError] = useState({});
+  const [error, setError] = useState("");
+  const [isLoading, setisLoading] = useState(false);
 
-  const [error, setError] = useState({});
+  // function to update the state in authContext
+  const { dispatch } = useAuthContext();
 
   const handleForm = (e) => {
     // updating the form state
@@ -51,7 +56,7 @@ function AuthForm({ isUser }) {
     }
 
     console.log(isErrors);
-    setError(isErrors);
+    setFormError(isErrors);
     return isErrors;
   };
 
@@ -59,16 +64,39 @@ function AuthForm({ isUser }) {
     e.preventDefault();
     console.log(formData);
     handleFormValidation();
+
+    try {
+      const response = await axios({
+        method: "post",
+        url: url,
+        headers: {
+          "Content-Type": "application/json",
+        },
+        data: {
+          email: formData.email,
+          password: formData.password,
+        },
+      });
+
+      const userResponse = response.data;
+
+      localStorage.setItem("user", JSON.stringify(userResponse));
+      console.log(response.data);
+      dispatch({ type: "LOGIN", payload: userResponse });
+    } catch (err) {
+      console.log(err);
+      setError(err.response.data.message);
+    }
   };
 
   useEffect(() => {
     console.log(formData);
-  }, [error]);
+  }, [formError]);
 
   return (
     <form className="authForm" onSubmit={handleFormSubmit}>
       <h1 className="authForm__title">{isUser ? "Login" : "Sign Up"}</h1>
-
+      {error && <h1 className="authForm__existing-user-err">{error}</h1>}
       {/* Email Field */}
 
       <div className="authForm__email-box">
@@ -87,8 +115,8 @@ function AuthForm({ isUser }) {
           // of the element to the state value
           onChange={handleForm}
         />
-        <p className={error.email ? "authForm__error" : "no-err"}>
-          {error.email}
+        <p className={formError.email ? "authForm__error" : "no-err"}>
+          {formError.email}
         </p>
       </div>
 
@@ -104,8 +132,8 @@ function AuthForm({ isUser }) {
           value={formData.password}
           onChange={handleForm}
         />
-        <p className={error.password ? "authForm__error" : "no-err"}>
-          {error.password}
+        <p className={formError.password ? "authForm__error" : "no-err"}>
+          {formError.password}
         </p>
       </div>
 
@@ -122,8 +150,10 @@ function AuthForm({ isUser }) {
             value={formData.repeatPassword}
             onChange={handleForm}
           />
-          <p className={error.repeatPassword ? "authForm__error" : "no-err"}>
-            {error.repeatPassword}
+          <p
+            className={formError.repeatPassword ? "authForm__error" : "no-err"}
+          >
+            {formError.repeatPassword}
           </p>
         </div>
       )}
