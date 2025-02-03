@@ -52,43 +52,43 @@ export const useAuthForm = (isUser, url) => {
       isErrors["repeatPassword"] = "passwords must match";
     }
 
-    console.log(isErrors);
     setFormError(isErrors);
     return isErrors;
   };
 
   const handleFormSubmit = async (e) => {
     e.preventDefault();
-    console.log(formData);
     handleFormValidation();
 
     try {
+      // send post request
       const response = await axios({
         method: "post",
         url: url,
         headers: {
           "Content-Type": "application/json",
         },
+        // data for the form with post request
         data: {
           email: formData.email,
           password: formData.password,
         },
       });
 
+      // store the response from the server
       const userResponse = response.data;
-
+      // set the response jwt from the server in local storage
       localStorage.setItem("user", JSON.stringify(userResponse));
-      console.log(response.data);
+      // call the dispatch function to update the state of the authReducer
+      // function
       dispatch({ type: "LOGIN", payload: userResponse });
+
+      // catch any errors
     } catch (err) {
-      console.log(err);
+      // set the error message to alert user of error
       setError(err.response.data.message);
     }
   };
-
-  useEffect(() => {
-    console.log(formData);
-  }, [formError]);
 
   return {
     formData,
