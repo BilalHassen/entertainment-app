@@ -1,8 +1,10 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 import { useAuthContext } from "./useAuthContext";
-
+import { useNavigate } from "react-router-dom";
 export const useAuthForm = (isUser, url) => {
+  const navigate = useNavigate();
+
   const [formData, setFormData] = useState({
     email: "",
     password: "",
@@ -62,17 +64,11 @@ export const useAuthForm = (isUser, url) => {
 
     try {
       // send post request
-      const response = await axios({
-        method: "post",
-        url: url,
-        headers: {
-          "Content-Type": "application/json",
-        },
+      const response = await axios.post(url, {
         // data for the form with post request
-        data: {
-          email: formData.email,
-          password: formData.password,
-        },
+
+        email: formData.email,
+        password: formData.password,
       });
 
       // store the response from the server
@@ -82,6 +78,8 @@ export const useAuthForm = (isUser, url) => {
       // call the dispatch function to update the state of the authReducer
       // function
       dispatch({ type: "LOGIN", payload: userResponse });
+
+      navigate("/");
 
       // catch any errors
     } catch (err) {

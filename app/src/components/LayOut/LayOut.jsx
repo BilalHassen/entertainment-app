@@ -21,11 +21,12 @@ export default function LayOut({ children }) {
       <Nav openModal={openModal} />
       <div className="content-wrapper">{children}</div>
 
+      {/*use react modal component */}
       <Modal
         isOpen={isOpen}
         onRequestClose={closeModal}
         contentLabel="LogOut Modal"
-        className="logout-modal" // Custom class for modal content
+        className="logout-modal"
         overlayClassName="logout-overlay"
       >
         <LogOut closeModal={closeModal} />
