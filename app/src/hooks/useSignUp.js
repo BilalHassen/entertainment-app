@@ -4,6 +4,7 @@ import { useAuthContext } from "./useAuthContext";
 import { useNavigate } from "react-router-dom";
 export const useAuthForm = (isUser, url) => {
   const navigate = useNavigate();
+  const { user } = useAuthContext();
 
   const [formData, setFormData] = useState({
     email: "",

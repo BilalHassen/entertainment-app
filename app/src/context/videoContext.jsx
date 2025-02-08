@@ -1,7 +1,7 @@
 import { createContext, useContext, useState, useEffect } from "react";
 import axios from "axios"; // Make sure to import axios
 import RecommendedVideos from "../components/VideoContainer/VideoContainer";
-
+import { useAuthContext } from "../hooks/useAuthContext";
 export const videoContext = createContext();
 
 // Custom hook to access the context
@@ -11,6 +11,8 @@ export const useVideosContext = () => {
 
 // VideoProvider Component
 export const VideoProvider = ({ children }) => {
+  const { user } = useAuthContext();
+  console.log(user);
   const [trendingVideos, setTrendingVideos] = useState([]);
   const [recommendedVideos, setRecommendedVideos] = useState([]);
   const [movies, setMovies] = useState([]);
@@ -21,7 +23,12 @@ export const VideoProvider = ({ children }) => {
     const fetchTrendingVideos = async () => {
       try {
         const response = await axios.get(
-          "http://localhost:3000/videos/trending-videos"
+          "http://localhost:3000/videos/trending-videos",
+          {
+            headers: {
+              Authorization: `Bearer ${user.token}`,
+            },
+          }
         );
         setTrendingVideos(response.data);
       } catch (error) {
@@ -32,7 +39,12 @@ export const VideoProvider = ({ children }) => {
     const fetchRecommendedVideos = async () => {
       try {
         const response = await axios.get(
-          "http://localhost:3000/videos/recommended-videos"
+          "http://localhost:3000/videos/recommended-videos",
+          {
+            headers: {
+              Authorization: `Bearer ${user.token}`,
+            },
+          }
         );
         setRecommendedVideos(response.data);
       } catch (error) {
@@ -42,7 +54,11 @@ export const VideoProvider = ({ children }) => {
 
     const fetchMovies = async () => {
       try {
-        const response = await axios.get("http://localhost:3000/movies");
+        const response = await axios.get("http://localhost:3000/movies", {
+          headers: {
+            Authorization: `Bearer ${user.token}`,
+          },
+        });
         setMovies(response.data);
       } catch (error) {
         console.error("Error fetching movies:", error);
@@ -51,7 +67,11 @@ export const VideoProvider = ({ children }) => {
 
     const fetchTvShows = async () => {
       try {
-        const response = await axios.get("http://localhost:3000/tv");
+        const response = await axios.get("http://localhost:3000/tv", {
+          headers: {
+            Authorization: `Bearer ${user.token}`,
+          },
+        });
         setTvShows(response.data);
       } catch (error) {
         console.error("Error fetching Tv shows:", error);
@@ -60,19 +80,25 @@ export const VideoProvider = ({ children }) => {
 
     const fetchBookMarkVideos = async () => {
       try {
-        const response = await axios.get("http://localhost:3000/bookmarks");
+        const response = await axios.get("http://localhost:3000/bookmarks", {
+          headers: {
+            Authorization: `Bearer ${user.token}`,
+          },
+        });
         setBookMarks(response.data);
       } catch (error) {
         console.error("Error fetching Book marked videos:", error);
       }
     };
 
-    fetchTrendingVideos();
-    fetchRecommendedVideos();
-    fetchMovies();
-    fetchTvShows();
-    fetchBookMarkVideos();
-  }, []);
+    if (user && user.token) {
+      fetchTrendingVideos();
+      fetchRecommendedVideos();
+      fetchMovies();
+      fetchTvShows();
+      fetchBookMarkVideos();
+    }
+  }, [user]);
 
   return (
     <videoContext.Provider
