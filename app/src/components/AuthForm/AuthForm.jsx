@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import "./AuthForm.scss";
 import { useAuthForm } from "../../hooks/useSignUp";
+import { Link } from "react-router-dom";
 
 function AuthForm({ isUser, url }) {
   const {
@@ -83,7 +84,10 @@ function AuthForm({ isUser, url }) {
           {isUser ? "Login" : "Create an account"}
         </button>
         <p className="authForm__text">
-          Already have an account? <span className="red">Login</span>
+          Already have an account?{" "}
+          <Link to="/signin">
+            <span className="red">Login</span>
+          </Link>
         </p>
       </div>
     </form>

@@ -1,7 +1,10 @@
 import React from "react";
 import AuthForm from "../../components/AuthForm/AuthForm";
-
+import { useAuthContext } from "../../hooks/useAuthContext";
+import { use } from "react";
 function SignIn() {
+  const { user } = useAuthContext();
+
   return (
     <div className="auth-wrapper">
       <main className="auth">

@@ -4,7 +4,6 @@ import { useNavigate } from "react-router";
 import { useAuthContext } from "../../hooks/useAuthContext";
 function SignUp() {
   const { user } = useAuthContext();
-  console.log(user);
 
   return (
     <div className="auth-wrapper">

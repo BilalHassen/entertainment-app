@@ -4,7 +4,6 @@ import { useAuthContext } from "./useAuthContext";
 import { useNavigate } from "react-router-dom";
 export const useAuthForm = (isUser, url) => {
   const navigate = useNavigate();
-  const { user } = useAuthContext();
 
   const [formData, setFormData] = useState({
     email: "",
@@ -43,7 +42,7 @@ export const useAuthForm = (isUser, url) => {
 
     if (!password.trim()) {
       isErrors["password"] = "password is required";
-    } else if (password.length < 8) {
+    } else if (password.length < 8 && !isUser) {
       isErrors["password"] = "password must be longer than 8 characters";
     }
 
