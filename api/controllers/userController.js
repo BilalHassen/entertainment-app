@@ -83,8 +83,6 @@ async function handleUserSignIn(req, res) {
     // Validate password
     if (!password.trim()) {
       isErrors["password"] = "Password is required";
-    } else if (password.length < 8) {
-      isErrors["password"] = "Password must be longer than 8 characters";
     }
 
     // If there are validation errors, send the response
@@ -104,7 +102,7 @@ async function handleUserSignIn(req, res) {
       const match = await bcrypt.compare(password, existingUser.password);
 
       if (!match) {
-        throw Error("Incorrect password");
+        throw Error((isErrors["password"] = "Incorrect Password or Email"));
       }
       const token = createToken(existingUser.id);
 
