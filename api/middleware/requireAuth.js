@@ -1,11 +1,13 @@
 const jwt = require("jsonwebtoken");
 const knex = require("knex")(require("../knexfile"));
 
+require("dotenv").config();
+
 const requireAuth = async (req, res, next) => {
   // verify user authentication
   // access the headers on the request object
   const { authorization } = req.headers;
-  console.log(authorization);
+  console.log("auth header", authorization);
 
   // check if the headers exists and has a value
   if (!authorization) {
@@ -16,10 +18,13 @@ const requireAuth = async (req, res, next) => {
   const token = authorization.split(" ")[1];
 
   try {
-    // verify the jwt token
-    const id = jwt.verify(token, process.env.SECRECT);
+    // verify the jwt token, returns a payload object
+    const decoded = jwt.verify(token, process.env.SECRET);
     // attach the id to the response so other middlware can access the value
-    req.user = await knex("users").where({ id: id }).select("user.id");
+    req.user = await knex("users")
+      .where({ id: decoded.id })
+      .select("id")
+      .first();
 
     next();
   } catch (error) {
