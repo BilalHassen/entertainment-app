@@ -24,7 +24,7 @@ async function getBookmarkVideos(req, res) {
       collectDuplicateThumbnails(bookmarkResponse);
     res.status(200).json(formattedBookmarkVideos);
   } catch (err) {
-    res.status(500).json(`LoL an error occured ${err}`);
+    res.status(500).json({ message: "Internal Server Error" });
   }
 }
 
