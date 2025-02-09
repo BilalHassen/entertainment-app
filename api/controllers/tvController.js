@@ -23,7 +23,7 @@ async function getTvShows(req, res) {
     const formattedTvShows = collectDuplicateThumbnails(tvResponse);
     res.status(200).json(formattedTvShows);
   } catch (err) {
-    res.status(500).json(`LoL an error occured ${err}`);
+    res.status(500).json({ message: "Internal Server Error" });
   }
 }
 

@@ -1,0 +1,84 @@
+@use "../../styles/partials/mixins" as *;
+@use "../../styles/partials/variables" as *;
+
+.auth {
+  padding: 3rem 1.6rem;
+  background-color: $midnight-blue;
+  border-radius: 4px;
+}
+
+.authForm {
+  //   &__title {
+  //     margin: 0.5rem 0rem;
+  //   }
+  display: flex;
+  gap: 4rem;
+  flex-direction: column;
+
+  &__error {
+    color: red;
+    font-size: 1.3rem;
+    margin-top: 0.5rem;
+  }
+
+  &__email-box,
+  &__password-box,
+  &__repassword-box {
+    display: flex;
+    flex-direction: column;
+
+    color: white;
+  }
+
+  &__email,
+  &__password,
+  &__repassword {
+    background-color: $midnight-blue;
+    border: none;
+    height: 4rem;
+    outline: none;
+    color: white;
+    font-size: 2rem;
+    border-bottom: 1px solid lightgray;
+
+    &::placeholder {
+      position: absolute;
+      bottom: 2.4rem;
+      color: rgb(130, 130, 130);
+      font-size: 1.6rem;
+      padding-left: 1rem;
+      text-align: start;
+    }
+  }
+
+  &__button {
+    all: unset;
+    background-color: $red;
+    width: 100%;
+    border-radius: 4px;
+    height: 4.8rem;
+    font-size: 1.6rem;
+    text-align: center;
+    color: white;
+    margin-bottom: 1rem;
+  }
+
+  .red {
+    color: $red;
+    font-size: 1.6rem;
+    text-align: center;
+  }
+
+  &__text {
+    text-align: center;
+    font-size: 1.3rem;
+    color: $white;
+  }
+  &__existing-user-err {
+    color: $red;
+  }
+}
+
+.no-err {
+  display: none;
+}

@@ -22,7 +22,7 @@ async function getTrendingVideos(req, res) {
 
     res.status(200).json(formattedTrendingVideos);
   } catch (error) {
-    console.log(`${error}: something went wrong`);
+    res.status(500).json({ message: "Internal Server Error" });
   }
 }
 
@@ -47,7 +47,7 @@ async function getRecommendedVideos(req, res) {
 
     res.status(200).json(formattedRecommendedVideos);
   } catch (error) {
-    res.status(500).json();
+    res.status(500).json({ message: "Internal Server Error" });
   }
 }
 
