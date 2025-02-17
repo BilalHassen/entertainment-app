@@ -1,8 +1,10 @@
-import React from "react";
+import React, { useEffect } from "react";
 import emptyBookMark from "../../../public/assets/icon-bookmark-empty.svg";
 import movie from "../../../public/assets/icon-category-movie.svg";
 import tv from "../../../public/assets/icon-category-tv.svg";
 import "./VideoCard.scss";
+import { useAuthContext } from "../../hooks/useAuthContext";
+import { jwtDecode } from "jwt-decode";
 
 function VideoCard({
   category,

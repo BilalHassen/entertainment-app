@@ -2,6 +2,7 @@ import React from "react";
 import LayOut from "@components/LayOut/LayOut";
 import VideoContainer from "../../components/VideoContainer/VideoContainer";
 import { useVideosContext } from "../../context/videoContext";
+
 function BookMarks() {
   const { bookmarks } = useVideosContext();
   // filter out the movies and tv series

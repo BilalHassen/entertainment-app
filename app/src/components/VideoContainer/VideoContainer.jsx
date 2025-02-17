@@ -1,10 +1,12 @@
 import React from "react";
 import VideoCard from "../VideoCard/VideoCard";
-
 import { useVideosContext } from "../../context/videoContext";
+import { useEffect } from "react";
+import { useTokenContext } from "../../context/TokenContext";
 
-function VideoContainer({ data, title, bookmarkedPage }) {
-  console.log(bookmarkedPage);
+function VideoContainer({ data, title, bookmarkedPage = false }) {
+  const userId = useTokenContext();
+  console.log(userId);
 
   return (
     <>
@@ -35,6 +37,7 @@ function VideoContainer({ data, title, bookmarkedPage }) {
               title={title}
               year={year}
               url={url}
+              userId={userId}
             />
           );
         })}

@@ -12,7 +12,6 @@ export const useVideosContext = () => {
 // VideoProvider Component
 export const VideoProvider = ({ children }) => {
   const { user } = useAuthContext();
-  console.log(user);
   const [trendingVideos, setTrendingVideos] = useState([]);
   const [recommendedVideos, setRecommendedVideos] = useState([]);
   const [movies, setMovies] = useState([]);
