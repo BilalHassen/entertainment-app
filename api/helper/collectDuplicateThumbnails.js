@@ -10,6 +10,7 @@ function collectDuplicateThumbnails(videos) {
       is_bookmarked,
       is_trending,
       is_recommended,
+      id,
     } = video;
     // check the existing video object for each item in this array
     if (existingVideo[video.id]) {
@@ -21,6 +22,7 @@ function collectDuplicateThumbnails(videos) {
       // create a key with the id and the value being this
       // entire object
       existingVideo[video.id] = {
+        id,
         title,
         year,
         category,

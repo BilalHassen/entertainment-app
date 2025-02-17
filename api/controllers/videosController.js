@@ -42,6 +42,8 @@ async function getRecommendedVideos(req, res) {
         "thumbnails.url"
       );
 
+    console.log(recommendedVideos);
+
     const formattedRecommendedVideos =
       collectDuplicateThumbnails(recommendedVideos);
 
