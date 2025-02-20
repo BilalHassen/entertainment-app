@@ -6,6 +6,7 @@ const bookmarksController = require("../controllers/bookmarksController");
 // home route will call the getTrendingVideos function
 // when the route is hit
 router.route("/").get(bookmarksController.getBookmarkVideos);
+router.route("/").post(bookmarksController.bookMarkVideo);
 
 // use node module to export the route
 module.exports = router;

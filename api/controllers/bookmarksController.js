@@ -28,6 +28,22 @@ async function getBookmarkVideos(req, res) {
   }
 }
 
+async function bookMarkVideo(req, res) {
+  const { userId, videoId } = req.body;
+  try {
+    const insertVideo = await knex("bookmarks")
+      .where("user_id", "=", userId)
+      .insert({ user_id: userId, movie_id: videoId });
+
+    console.log("VIDEO ADDED", insertVideo);
+    res.status(201).json({ message: "BookMarked" });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: "An error occured" });
+  }
+}
+
 module.exports = {
   getBookmarkVideos,
+  bookMarkVideo,
 };
