@@ -4,10 +4,15 @@ const {
 } = require("../helper/collectDuplicateThumbnails");
 
 async function getBookmarkVideos(req, res) {
+  const userId = req.user.id;
+
+  console.log("USER ID:", userId);
+
   try {
-    const bookmarkResponse = await knex("movies")
+    const bookmarkResponse = await knex("bookmarks")
+      .where("bookmarks.user_id", "=", userId)
+      .join("movies", "bookmarks.movie_id", "=", "movies.id")
       .join("thumbnails", "movies.id", "=", "thumbnails.movie_id")
-      .where("movies.is_bookmarked", "=", true)
       .select(
         "movies.id",
         "movies.title",
@@ -16,7 +21,6 @@ async function getBookmarkVideos(req, res) {
         "movies.rating",
         "movies.is_bookmarked",
         "movies.is_trending",
-        "movies.is_recommended",
         "thumbnails.url"
       );
 
