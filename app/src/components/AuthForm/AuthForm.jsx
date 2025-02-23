@@ -1,9 +1,11 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import "./AuthForm.scss";
 import { useAuthForm } from "../../hooks/useSignUp";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
-function AuthForm({ isUser, url }) {
+function AuthForm({ url }) {
+  const [isUser, setUser] = useState(undefined);
+
   const {
     formData,
     formError,
@@ -12,6 +14,16 @@ function AuthForm({ isUser, url }) {
     handleForm,
     handleFormSubmit,
   } = useAuthForm(isUser, url);
+
+  const location = useLocation();
+
+  useEffect(() => {
+    if (location.pathname === "/signup") {
+      setUser(false);
+    } else {
+      setUser(true);
+    }
+  }, [location, isUser]);
 
   return (
     <form className="authForm" onSubmit={handleFormSubmit}>
@@ -83,12 +95,21 @@ function AuthForm({ isUser, url }) {
         <button className="authForm__button" type="submit">
           {isUser ? "Login" : "Create an account"}
         </button>
-        <p className="authForm__text">
-          Already have an account?{" "}
-          <Link to="/signin">
-            <span className="red">Login</span>
-          </Link>
-        </p>
+        {!isUser ? (
+          <p className="authForm__text">
+            Already have an account?{" "}
+            <Link to="/signin">
+              <span className="red">Login</span>
+            </Link>
+          </p>
+        ) : (
+          <p className="authForm__text">
+            Don't have an account?{" "}
+            <Link to="/signup">
+              <span className="red">Signup</span>
+            </Link>
+          </p>
+        )}
       </div>
     </form>
   );

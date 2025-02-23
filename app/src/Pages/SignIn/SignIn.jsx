@@ -1,6 +1,7 @@
 import React from "react";
 import AuthForm from "../../components/AuthForm/AuthForm";
 import { useAuthContext } from "../../hooks/useAuthContext";
+import { useState } from "react";
 import { use } from "react";
 function SignIn() {
   const { user } = useAuthContext();
@@ -8,7 +9,7 @@ function SignIn() {
   return (
     <div className="auth-wrapper">
       <main className="auth">
-        <AuthForm isUser={true} url={"http://localhost:3000/user/signin"} />
+        <AuthForm url={"http://localhost:3000/user/signin"} />
       </main>
     </div>
   );
