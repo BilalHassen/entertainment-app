@@ -4,6 +4,7 @@ import "./TrendingVideoCard.scss";
 import emptyBookMark from "../../../public/assets/icon-bookmark-empty.svg";
 import movie from "../../../public/assets/icon-category-movie.svg";
 import tv from "../../../public/assets/icon-category-tv.svg";
+import { useBookMark } from "../../hooks/useBookMark";
 
 function TrendingVideoCard({
   category,
@@ -13,7 +14,13 @@ function TrendingVideoCard({
   title,
   url,
   year,
+  id,
 }) {
+  const { addBookMark } = useBookMark();
+  const handleBookmark = async () => {
+    await addBookMark(id);
+  };
+
   return (
     <div
       className="trendingVideos__card"
@@ -24,7 +31,7 @@ function TrendingVideoCard({
       }}
     >
       <div className="trendingVideos__content">
-        <button className="trendingVideos__book-btn">
+        <button className="trendingVideos__book-btn" onClick={handleBookmark}>
           <img
             className="trendingVideos__bookmark-icon"
             src={emptyBookMark}
