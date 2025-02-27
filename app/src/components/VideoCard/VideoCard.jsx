@@ -3,9 +3,8 @@ import emptyBookMark from "../../../public/assets/icon-bookmark-empty.svg";
 import movie from "../../../public/assets/icon-category-movie.svg";
 import tv from "../../../public/assets/icon-category-tv.svg";
 import "./VideoCard.scss";
-import axios from "axios";
-import { useTokenContext } from "../../context/TokenContext";
-import { useAuthContext } from "../../hooks/useAuthContext";
+
+import { useBookMark } from "../../hooks/useBookMark";
 
 function VideoCard({
   category,
@@ -17,30 +16,9 @@ function VideoCard({
   url,
   year,
 }) {
-  const userId = useTokenContext();
-  const user = useAuthContext();
-  const bookMarkVideo = async () => {
-    console.log(user.user.token);
-    // get user token
-    const token = user.user.token;
-    // body data to be sent with request
-    const userData = {
-      userId: userId,
-      videoId: id,
-    };
-    const response = await axios.post(
-      "http://localhost:3000/bookmarks",
-      userData,
-      {
-        // headers for the request
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
-        },
-      }
-    );
-
-    console.log(response);
+  const { addBookMark } = useBookMark();
+  const handleBookmark = async () => {
+    await addBookMark(id);
   };
 
   return (
@@ -54,7 +32,7 @@ function VideoCard({
             backgroundPosition: "center",
           }}
         >
-          <button className="videoContainer__book-btn" onClick={bookMarkVideo}>
+          <button className="videoContainer__book-btn" onClick={handleBookmark}>
             <img
               className="videoContainer__bookmark-icon"
               src={emptyBookMark}
