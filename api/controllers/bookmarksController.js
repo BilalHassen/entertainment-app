@@ -35,6 +35,16 @@ async function getBookmarkVideos(req, res) {
 async function bookMarkVideo(req, res) {
   const { userId, videoId } = req.body;
   try {
+    const existingVideo = await knex("bookmarks")
+      .where({
+        user_id: userId,
+        movie_id: videoId,
+      })
+      .first();
+
+    if (existingVideo) {
+      return res.status(200).json({ message: "Already bookmarked." });
+    }
     const insertVideo = await knex("bookmarks")
       .where("user_id", "=", userId)
       .insert({ user_id: userId, movie_id: videoId });
