@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import LayOut from "@components/LayOut/LayOut";
 import VideoContainer from "../../components/VideoContainer/VideoContainer";
 import { useVideosContext } from "../../context/videoContext";
@@ -14,18 +14,33 @@ function BookMarks() {
     (movie) => movie.category === "TV Series"
   );
 
+  useEffect(() => {
+    console.log(bookmarks.length);
+  }, [bookmarks]);
+
   return (
     <LayOut>
-      <VideoContainer
-        data={bookmarkMovies}
-        title="Bookmarked Movies"
-        bookmarkedPage={true}
-      />
-      <VideoContainer
-        data={bookmarkTvSeries}
-        title="Bookmarked TV Series"
-        bookmarkedPage={true}
-      />
+      {bookmarks.length > 0 ? (
+        <>
+          <VideoContainer
+            data={bookmarkMovies}
+            title="Bookmarked Movies"
+            bookmarkedPage={true}
+          />
+          <VideoContainer
+            data={bookmarkTvSeries}
+            title="Bookmarked TV Series"
+            bookmarkedPage={true}
+          />
+        </>
+      ) : (
+        // change this to a different layout use video container for now
+        <VideoContainer
+          data={bookmarkTvSeries}
+          title="Your Bookmared content will appear here"
+          bookmarkedPage={true}
+        />
+      )}
     </LayOut>
   );
 }

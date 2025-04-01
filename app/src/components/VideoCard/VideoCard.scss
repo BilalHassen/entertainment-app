@@ -35,6 +35,12 @@
     outline: none;
     border: none;
     background-color: rgba(0, 0, 0, 0.5);
+    cursor: pointer;
+    transition: 0.3s ease-in-out;
+
+    &:hover {
+      background-color: $steel-blue;
+    }
   }
 
   // all text excluding title container
