@@ -14,9 +14,7 @@ function BookMarks() {
     (movie) => movie.category === "TV Series"
   );
 
-  useEffect(() => {
-    console.log(bookmarks.length);
-  }, [bookmarks]);
+ 
 
   return (
     <LayOut>

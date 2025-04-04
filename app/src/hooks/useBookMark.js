@@ -1,12 +1,14 @@
 import axios from "axios";
 import { useTokenContext } from "../context/TokenContext";
 import { useAuthContext } from "../hooks/useAuthContext";
+import { useVideosContext } from "../context/videoContext";
 
 export const useBookMark = () => {
   const userId = useTokenContext();
   const user = useAuthContext();
+  const {fetchRecommendedVideos} = useVideosContext()
 
-  console.log(user.user.token);
+ 
   // get user token
   const token = user.user.token;
   // body data to be sent with request
@@ -28,6 +30,10 @@ export const useBookMark = () => {
           },
         }
       );
+
+       await fetchRecommendedVideos()
+      
+
     } catch (error) {
       console.error("Error adding bookmark:", error);
     }

@@ -16,11 +16,15 @@ function VideoCard({
   url,
   year,
 }) {
+
+
   const { addBookMark } = useBookMark();
   const handleBookmark = async () => {
     await addBookMark(id);
   };
 
+  
+ 
   return (
     <>
       <div className="videoContainer__card">
@@ -32,7 +36,7 @@ function VideoCard({
             backgroundPosition: "center",
           }}
         >
-          <button className="videoContainer__book-btn" onClick={handleBookmark}>
+          <button className={is_bookmarked ? "videoContainer__bookmarked" : "videoContainer__book-btn"} onClick={handleBookmark}>
             <img
               className="videoContainer__bookmark-icon"
               src={emptyBookMark}

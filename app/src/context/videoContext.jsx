@@ -18,7 +18,7 @@ export const VideoProvider = ({ children }) => {
   const [tvShows, setTvShows] = useState([]);
   const [bookmarks, setBookMarks] = useState([]);
 
-  useEffect(() => {
+  
     const fetchTrendingVideos = async () => {
       try {
         const response = await axios.get(
@@ -90,14 +90,18 @@ export const VideoProvider = ({ children }) => {
       }
     };
 
-    if (user && user.token) {
-      fetchTrendingVideos();
-      fetchRecommendedVideos();
-      fetchMovies();
-      fetchTvShows();
-      fetchBookMarkVideos();
-    }
-  }, [user]);
+    useEffect(()=>{
+      if (user && user.token) {
+        fetchTrendingVideos();
+        fetchRecommendedVideos();
+        fetchMovies();
+        fetchTvShows();
+        fetchBookMarkVideos();
+      }
+    }, [user])
+   
+
+  
 
   return (
     <videoContext.Provider
@@ -106,6 +110,7 @@ export const VideoProvider = ({ children }) => {
         setTrendingVideos,
         recommendedVideos,
         setRecommendedVideos,
+        fetchRecommendedVideos,
         movies,
         setMovies,
         tvShows,

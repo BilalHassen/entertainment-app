@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useState } from "react";
 import Nav from "@components/Nav/nav";
 import Trending from "@components/Trending/Trending";
@@ -9,6 +9,12 @@ import "./Home.scss";
 
 function Home() {
   const { recommendedVideos } = useVideosContext();
+
+  useEffect(()=>{
+    console.log(recommendedVideos)
+  },[recommendedVideos])
+
+
 
   return (
     <>
