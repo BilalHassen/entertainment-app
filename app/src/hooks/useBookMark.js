@@ -6,7 +6,7 @@ import { useVideosContext } from "../context/videoContext";
 export const useBookMark = () => {
   const userId = useTokenContext();
   const user = useAuthContext();
-  const {fetchRecommendedVideos} = useVideosContext()
+  const {fetchRecommendedVideos, fetchTrendingVideos} = useVideosContext()
 
  
   // get user token
@@ -31,7 +31,9 @@ export const useBookMark = () => {
         }
       );
 
+      // get the updated recommended videos so they can reflect that the video is bookmarked
        await fetchRecommendedVideos()
+       await fetchTrendingVideos()
       
 
     } catch (error) {

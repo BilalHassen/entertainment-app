@@ -16,6 +16,8 @@ function TrendingVideoCard({
   year,
   id,
 }) {
+
+  console.log(bookmarked)
   const { addBookMark } = useBookMark();
   const handleBookmark = async () => {
     await addBookMark(id);
@@ -31,7 +33,7 @@ function TrendingVideoCard({
       }}
     >
       <div className="trendingVideos__content">
-        <button className="trendingVideos__book-btn" onClick={handleBookmark}>
+        <button className={bookmarked ? "trendingVideos__bookmarked": "trendingVideos__book-btn" } onClick={handleBookmark}>
           <img
             className="trendingVideos__bookmark-icon"
             src={emptyBookMark}

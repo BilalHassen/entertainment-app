@@ -108,6 +108,7 @@ export const VideoProvider = ({ children }) => {
       value={{
         trendingVideos,
         setTrendingVideos,
+        fetchTrendingVideos,
         recommendedVideos,
         setRecommendedVideos,
         fetchRecommendedVideos,
