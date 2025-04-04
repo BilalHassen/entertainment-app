@@ -7,6 +7,7 @@ async function getTrendingVideos(req, res) {
   try {
     const trendingVideos = await knex("movies")
       .join("thumbnails", "movies.id", "=", "thumbnails.movie_id")
+      .leftJoin("bookmarks", "movies.id", "=", "bookmarks.movie_id")  // Changed to leftJoin
       .where("movies.is_trending", "=", true)
       .select(
         "movies.id",
@@ -16,7 +17,8 @@ async function getTrendingVideos(req, res) {
         "movies.rating",
         "movies.is_bookmarked",
         "movies.is_trending",
-        "thumbnails.url"
+        "thumbnails.url",
+        "bookmarks.is_bookmarked"
       );
     const formattedTrendingVideos = collectDuplicateThumbnails(trendingVideos);
 
@@ -30,6 +32,7 @@ async function getRecommendedVideos(req, res) {
   try {
     const recommendedVideos = await knex("movies")
       .join("thumbnails", "movies.id", "=", "thumbnails.movie_id")
+      .leftJoin("bookmarks", "movies.id", "=", "bookmarks.movie_id")  // Changed to leftJoin
       .where("movies.is_recommended", "=", true)
       .select(
         "movies.id",
@@ -37,10 +40,12 @@ async function getRecommendedVideos(req, res) {
         "movies.year",
         "movies.category",
         "movies.rating",
-        "movies.is_bookmarked",
         "movies.is_recommended",
-        "thumbnails.url"
+        "thumbnails.url",
+        "bookmarks.is_bookmarked"
       );
+
+      
 
     const formattedRecommendedVideos =
       collectDuplicateThumbnails(recommendedVideos);

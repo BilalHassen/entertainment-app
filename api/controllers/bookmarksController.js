@@ -47,7 +47,7 @@ async function bookMarkVideo(req, res) {
     }
     const insertVideo = await knex("bookmarks")
       .where("user_id", "=", userId)
-      .insert({ user_id: userId, movie_id: videoId });
+      .insert({ user_id: userId, movie_id: videoId, is_bookmarked: true });
 
     console.log("VIDEO ADDED", insertVideo);
     res.status(201).json({ message: "BookMarked" });

@@ -37,6 +37,7 @@ function collectDuplicateThumbnails(videos) {
   // extract values of the existing videos object
   // and return an array
   const videosArray = Object.values(existingVideo);
+  console.log(videosArray)
   return videosArray;
 }
 
