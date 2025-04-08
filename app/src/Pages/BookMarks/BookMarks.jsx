@@ -14,7 +14,9 @@ function BookMarks() {
     (movie) => movie.category === "TV Series"
   );
 
- 
+ useEffect(()=>{
+  
+ })
 
   return (
     <LayOut>

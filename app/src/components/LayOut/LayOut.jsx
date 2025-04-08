@@ -19,6 +19,8 @@ export default function LayOut({ children }) {
   return (
     <div className="home-wrapper">
       <Nav openModal={openModal} />
+      
+      {/*all other elements will go inside content-wrapper*/}
       <div className="content-wrapper">{children}</div>
 
       {/*use react modal component */}

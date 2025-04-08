@@ -19,6 +19,9 @@ function Home() {
   return (
     <>
       <LayOut>
+        {/*trending and videocontainer are slotted in content-wrapper
+        as children
+        */}
         <Trending />
         <VideoContainer data={recommendedVideos} title="Recommended for you" />
       </LayOut>
