@@ -4,7 +4,7 @@ import VideoContainer from "../../components/VideoContainer/VideoContainer";
 import { useVideosContext } from "../../context/videoContext";
 
 function BookMarks() {
-  const { bookmarks } = useVideosContext();
+  const { bookmarks, fetchBookMarkVideos, } = useVideosContext();
   // filter out the movies and tv series
   const bookmarkMovies = bookmarks.filter(
     (movie) => movie.category !== "TV Series"
@@ -15,8 +15,8 @@ function BookMarks() {
   );
 
  useEffect(()=>{
-  
- })
+    fetchBookMarkVideos()
+ }, [])
 
   return (
     <LayOut>

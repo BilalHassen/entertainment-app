@@ -117,6 +117,7 @@ export const VideoProvider = ({ children }) => {
         tvShows,
         setTvShows,
         bookmarks,
+        fetchBookMarkVideos,
         setBookMarks,
       }}
     >
