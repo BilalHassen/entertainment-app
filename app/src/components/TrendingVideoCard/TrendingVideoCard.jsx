@@ -17,7 +17,7 @@ function TrendingVideoCard({
   id,
 }) {
 
-  console.log(bookmarked)
+  
   const { addBookMark } = useBookMark();
   const handleBookmark = async () => {
     await addBookMark(id);

@@ -10,9 +10,9 @@ import "./Home.scss";
 function Home() {
   const { recommendedVideos } = useVideosContext();
 
-  useEffect(()=>{
-    console.log(recommendedVideos)
-  },[recommendedVideos])
+  // useEffect(()=>{
+  //   console.log(recommendedVideos)
+  // },[recommendedVideos])
 
 
 
