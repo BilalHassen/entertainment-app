@@ -17,7 +17,7 @@ function VideoCard({
   year,
 }) {
 
-
+console.log(is_bookmarked)
   const { addBookMark } = useBookMark();
   const handleBookmark = async () => {
     await addBookMark(id);

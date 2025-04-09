@@ -41,5 +41,9 @@ export const useBookMark = () => {
     }
   };
 
+  const deleteBookMarkVideo = async (videoId) => {
+    
+  }
+
   return { addBookMark };
 };

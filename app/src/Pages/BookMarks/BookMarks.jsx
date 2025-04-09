@@ -14,6 +14,7 @@ function BookMarks() {
     (movie) => movie.category === "TV Series"
   );
 
+  // load bookmark videos when navigation is to the bookmarks page
  useEffect(()=>{
     fetchBookMarkVideos()
  }, [])
