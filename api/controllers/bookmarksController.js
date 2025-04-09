@@ -57,7 +57,12 @@ async function bookMarkVideo(req, res) {
   }
 }
 
+async function deleteBookMarkVideo(){
+  
+}
+
 module.exports = {
   getBookmarkVideos,
   bookMarkVideo,
+  deleteBookMarkVideo
 };

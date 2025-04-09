@@ -7,6 +7,6 @@ const bookmarksController = require("../controllers/bookmarksController");
 // when the route is hit
 router.route("/").get(bookmarksController.getBookmarkVideos);
 router.route("/").post(bookmarksController.bookMarkVideo);
-
+router.route("/").delete(bookmarksController.deleteBookMarkVideo)
 // use node module to export the route
 module.exports = router;
