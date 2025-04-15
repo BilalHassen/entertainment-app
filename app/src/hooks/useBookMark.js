@@ -42,8 +42,26 @@ export const useBookMark = () => {
   };
 
   const deleteBookMarkVideo = async (videoId) => {
-    
+    const videoData = {
+      videoId: videoId
+    }
+
+    try{
+      const deleteResponse = await axios.delete("http://localhost:3000/bookmarks",
+      {
+        data: videoData,
+        // headers for the request
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+      })
+      console.log(deleteResponse)
+    }catch(err){
+      console.error("Error adding bookmark:", err);
+    }
+
   }
 
-  return { addBookMark };
+  return { addBookMark, deleteBookMarkVideo };
 };

@@ -17,12 +17,15 @@ function VideoCard({
   year,
 }) {
 
-  const { addBookMark } = useBookMark();
+  const { addBookMark, deleteBookMarkVideo } = useBookMark();
   const handleBookmark = async () => {
     await addBookMark(id);
   };
 
-  
+  const removeBookMark = async ()=>{
+    await deleteBookMarkVideo(id)
+     console.log("clicked")
+  }
  
   return (
     <>
@@ -35,6 +38,7 @@ function VideoCard({
             backgroundPosition: "center",
           }}
         >
+          <button className="todelete"onClick={removeBookMark}>delete</button>
           <button className={is_bookmarked ? "videoContainer__bookmarked" : "videoContainer__book-btn"} onClick={handleBookmark}>
             <img
               className="videoContainer__bookmark-icon"
