@@ -57,8 +57,10 @@ async function bookMarkVideo(req, res) {
   }
 }
 
-async function deleteBookMarkVideo(){
-  
+async function deleteBookMarkVideo(req, res){
+  // carry on delete
+    const {videoId} = req.body
+    // return res.status(200).json({ message: "Bookmark to be deleted", videoId });
 }
 
 module.exports = {
