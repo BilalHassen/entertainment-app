@@ -43,7 +43,7 @@ export const useBookMark = () => {
 
   const deleteBookMarkVideo = async (videoId) => {
     const videoData = {
-      videoId: videoId
+      videoId: videoId,
     }
 
     try{
@@ -56,9 +56,11 @@ export const useBookMark = () => {
           Authorization: `Bearer ${token}`,
         },
       })
-      console.log(deleteResponse)
+         // get the updated recommended videos so they can reflect that the video is bookmarked
+         await fetchRecommendedVideos()
+         await fetchTrendingVideos()
     }catch(err){
-      console.error("Error adding bookmark:", err);
+      console.error("Error deleting bookmark:", err);
     }
 
   }
