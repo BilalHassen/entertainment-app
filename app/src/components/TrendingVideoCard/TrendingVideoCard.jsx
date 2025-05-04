@@ -4,6 +4,7 @@ import "./TrendingVideoCard.scss";
 import emptyBookMark from "../../../public/assets/icon-bookmark-empty.svg";
 import movie from "../../../public/assets/icon-category-movie.svg";
 import tv from "../../../public/assets/icon-category-tv.svg";
+import BookMarkButton from "../BookMarkButton/BookMarkButton";
 import  {useState, useEffect} from "react"
 import { useBookMark } from "../../hooks/useBookMark";
 
@@ -17,28 +18,7 @@ function TrendingVideoCard({
   year,
   id,
 }) {
-
   
-  // state for when a video is bookmarked
-  // take this logic and put in a resuable component with the jsx structure below under the comments
-  const [isBookmarked, setBookmark] = useState(false);
-
-  const { addBookMark, deleteBookMarkVideo } = useBookMark();
-  const handleBookmark = async () => {
-    await addBookMark(id);
-  };
-
-  const removeBookMark = async () => {
-    await deleteBookMarkVideo(id);
-    console.log("clicked");
-  };
-
-  useEffect(() => {
-    if (bookmarked) {
-      setBookmark(true);
-    }
-  }, []);
-
   return (
     <div
       className="trendingVideos__card"
@@ -50,29 +30,14 @@ function TrendingVideoCard({
     >
       <div className="trendingVideos__content">
         {/*take this button structure and make a component */}
-      {bookmarked ? (
-  <button
-    className="trendingVideos__bookmarked"
-    onClick={removeBookMark}
-  >
-    <img
-      className="trendingVideos__bookmark-icon"
-      src={emptyBookMark}
-      alt="bookmark icon"
-    />
-  </button>
-) : (
-  <button
-    className="trendingVideos__book-btn"
-    onClick={handleBookmark}
-  >
-    <img
-      className="trendingVideos__bookmark-icon"
-      src={emptyBookMark}
-      alt="bookmark icon"
-    />
-  </button>
-)}
+  <BookMarkButton
+    is_bookmarked={bookmarked}
+    bookMarkIcon={emptyBookMark}
+    prefixClass={"trendingVideos"}
+    videoId={id}
+    
+  
+  />
 
         <div className="trendingVideos__text-content">
           <div className="trendingVideos__flex-wrapper">
