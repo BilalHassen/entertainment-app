@@ -59,8 +59,18 @@ async function bookMarkVideo(req, res) {
 
 async function deleteBookMarkVideo(req, res){
   // carry on delete
-    const {videoId} = req.body
-    // return res.status(200).json({ message: "Bookmark to be deleted", videoId });
+    const {videoId, title} = req.body
+    try{
+      const removeBookMarkVideo = await knex("bookmarks")
+      .where("movie_id", "=", videoId).del()
+
+      return res.status(200).json({ message: "Bookmark deleted", removeBookMarkVideo });
+
+    }catch(err){
+      console.error(err)
+      return response.status(500).json({message: "Internal Server Error"})
+    }
+   
 }
 
 module.exports = {
