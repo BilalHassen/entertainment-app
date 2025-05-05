@@ -4,10 +4,6 @@ import { useBookMark } from "../../hooks/useBookMark";
 
 function BookMarkButton({is_bookmarked, bookMarkIcon, prefixClass, videoId, videoCategory}) {
 
-      // state for when a video is bookmarked
-  // take this logic and put in a resuable component with the jsx structure below under the comments
-  const [isBookmarked, setBookmark] = useState(false);
-
   const { addBookMark, deleteBookMarkVideo } = useBookMark();
   const handleBookmark = async () => {
     await addBookMark(videoId, videoCategory);
