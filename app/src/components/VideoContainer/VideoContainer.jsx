@@ -29,6 +29,7 @@ function VideoContainer({ data, title, bookmarkedPage = false }) {
             year,
           } = video;
           const uniqueId = crypto.randomUUID();
+          
           return (
             <VideoCard
               key={uniqueId}
@@ -41,6 +42,7 @@ function VideoContainer({ data, title, bookmarkedPage = false }) {
               year={year}
               url={url}
               userId={userId}
+              bookmarkedPage={bookmarkedPage}
             />
           );
         })}

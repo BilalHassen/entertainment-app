@@ -16,6 +16,7 @@ function VideoCard({
   title,
   url,
   year,
+  bookmarkedPage
 }) {
   
 
@@ -36,6 +37,7 @@ function VideoCard({
           bookMarkIcon={emptyBookMark}
           videoId={id}
           videoCategory={"recommended"}
+          bookmarkPage={bookmarkedPage}
           />
         
         </div>

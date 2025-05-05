@@ -1,8 +1,11 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useState } from 'react';
 import { useBookMark } from "../../hooks/useBookMark";
 
-function BookMarkButton({is_bookmarked, bookMarkIcon, prefixClass, videoId, videoCategory}) {
+function BookMarkButton({is_bookmarked, bookMarkIcon, prefixClass, videoId, videoCategory, bookmarkPage = false }) {
+
+    const [isBookmarkPage, setIsBookmarkPage] = useState(false)
+
 
   const { addBookMark, deleteBookMarkVideo } = useBookMark();
   const handleBookmark = async () => {
@@ -15,31 +18,28 @@ function BookMarkButton({is_bookmarked, bookMarkIcon, prefixClass, videoId, vide
   };
 
 
+// isFilled will be a boolean value the one which video is bookmarked
+  const isFilled = bookmarkPage || is_bookmarked 
+
+  // ff it's filled click remove it. Otherwise, it will add the bookmark.
+  const handleClick = isFilled ? removeBookMark : handleBookmark
+
+  const buttonClass = `${prefixClass}__${
+    isFilled ? "bookmarked" : "book-btn"
+  }`;
+
   return (
     <>
-    {is_bookmarked ? (
-        <button
-          className={`${prefixClass}__bookmarked`}
-          onClick={removeBookMark}
-        >
-          <img
-            className={`${prefixClass}__bookmark-icon`}
-            src={bookMarkIcon}
-            alt="bookmark icon"
-          />
-        </button>
-      ) : (
-        <button
-          className={`${prefixClass}__book-btn`}
-          onClick={handleBookmark}
-        >
-          <img
-            className={`${prefixClass}__bookmark-icon`}
-            src={bookMarkIcon}
-            alt="bookmark icon"
-          />
-        </button>
-      )}
+     <button
+    className={buttonClass}
+    onClick={handleClick}
+  >
+    <img
+      className={`${prefixClass}__bookmark-icon`}
+      src={bookMarkIcon}
+      alt="bookmark icon"
+    />
+  </button>
       </>
   )
 }
