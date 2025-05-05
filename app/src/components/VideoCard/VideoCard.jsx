@@ -35,6 +35,7 @@ function VideoCard({
           prefixClass={"videoContainer"}
           bookMarkIcon={emptyBookMark}
           videoId={id}
+          videoCategory={"recommended"}
           />
         
         </div>

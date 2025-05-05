@@ -2,7 +2,7 @@ import React from 'react'
 import { useState } from 'react';
 import { useBookMark } from "../../hooks/useBookMark";
 
-function BookMarkButton({is_bookmarked, bookMarkIcon, prefixClass, videoId}) {
+function BookMarkButton({is_bookmarked, bookMarkIcon, prefixClass, videoId, videoCategory}) {
 
       // state for when a video is bookmarked
   // take this logic and put in a resuable component with the jsx structure below under the comments
@@ -10,11 +10,11 @@ function BookMarkButton({is_bookmarked, bookMarkIcon, prefixClass, videoId}) {
 
   const { addBookMark, deleteBookMarkVideo } = useBookMark();
   const handleBookmark = async () => {
-    await addBookMark(videoId);
+    await addBookMark(videoId, videoCategory);
   };
 
   const removeBookMark = async () => {
-    await deleteBookMarkVideo(videoId);
+    await deleteBookMarkVideo(videoId, videoCategory);
     console.log("clicked");
   };
 
