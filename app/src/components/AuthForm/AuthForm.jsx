@@ -18,17 +18,18 @@ function AuthForm({ url }) {
   const location = useLocation();
 
   useEffect(() => {
-    if (location.pathname === "/signup") {
-      setUser(false);
-    } else {
-      setUser(true);
-    }
-  }, [location, isUser]);
+    setUser(location.pathname !== "/signup");
+  }, [location.pathname]);
 
   return (
     <form className="authForm" onSubmit={handleFormSubmit}>
       <h1 className="authForm__title">{isUser ? "Login" : "Sign Up"}</h1>
-      {error && <h1 className="authForm__existing-user-err">{error}</h1>}
+      {error && (
+  <h1 className="authForm__existing-user-err" role="alert" aria-live="assertive">
+    {error}
+  </h1>
+)}
+
       {/* Email Field */}
 
       <div className="authForm__email-box">
@@ -92,9 +93,10 @@ function AuthForm({ url }) {
 
       {/* Submit Button */}
       <div className="authForm__button-wrapper">
-        <button className="authForm__button" type="submit">
-          {isUser ? "Login" : "Create an account"}
-        </button>
+      <button className="authForm__button" type="submit" disabled={isLoading}>
+  {isLoading ? "Loading..." : isUser ? "Login" : "Create an account"}
+</button>
+
         {!isUser ? (
           <p className="authForm__text">
             Already have an account?{" "}
