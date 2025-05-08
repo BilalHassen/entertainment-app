@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import "./AuthForm.scss";
-import { useAuthForm } from "../../hooks/useSignUp";
+import { useAuthForm } from "../../hooks/useAuthForm";
 import { Link, useLocation } from "react-router-dom";
 
 function AuthForm({ url }) {
