@@ -1,9 +1,11 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import "./AuthForm.scss";
-import { useAuthForm } from "../../hooks/useSignUp";
-import { Link } from "react-router-dom";
+import { useAuthForm } from "../../hooks/useAuthForm";
+import { Link, useLocation } from "react-router-dom";
 
-function AuthForm({ isUser, url }) {
+function AuthForm({ url }) {
+  const [isUser, setUser] = useState(undefined);
+
   const {
     formData,
     formError,
@@ -13,10 +15,21 @@ function AuthForm({ isUser, url }) {
     handleFormSubmit,
   } = useAuthForm(isUser, url);
 
+  const location = useLocation();
+
+  useEffect(() => {
+    setUser(location.pathname !== "/signup");
+  }, [location.pathname]);
+
   return (
     <form className="authForm" onSubmit={handleFormSubmit}>
       <h1 className="authForm__title">{isUser ? "Login" : "Sign Up"}</h1>
-      {error && <h1 className="authForm__existing-user-err">{error}</h1>}
+      {error && (
+  <h1 className="authForm__existing-user-err" role="alert" aria-live="assertive">
+    {error}
+  </h1>
+)}
+
       {/* Email Field */}
 
       <div className="authForm__email-box">
@@ -80,15 +93,25 @@ function AuthForm({ isUser, url }) {
 
       {/* Submit Button */}
       <div className="authForm__button-wrapper">
-        <button className="authForm__button" type="submit">
-          {isUser ? "Login" : "Create an account"}
-        </button>
-        <p className="authForm__text">
-          Already have an account?{" "}
-          <Link to="/signin">
-            <span className="red">Login</span>
-          </Link>
-        </p>
+      <button className="authForm__button" type="submit" disabled={isLoading}>
+  {isLoading ? "Loading..." : isUser ? "Login" : "Create an account"}
+</button>
+
+        {!isUser ? (
+          <p className="authForm__text">
+            Already have an account?{" "}
+            <Link to="/signin">
+              <span className="red">Login</span>
+            </Link>
+          </p>
+        ) : (
+          <p className="authForm__text">
+            Don't have an account?{" "}
+            <Link to="/signup">
+              <span className="red">Signup</span>
+            </Link>
+          </p>
+        )}
       </div>
     </form>
   );

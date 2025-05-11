@@ -35,7 +35,26 @@
     outline: none;
     border: none;
     background-color: rgba(0, 0, 0, 0.5);
+    cursor: pointer;
+    transition: 0.3s ease-in-out;
+
+    &:hover {
+      background-color: $steel-blue;
+    }
   }
+
+  &__bookmarked{
+    width: 3rem;
+    height: 3rem;
+    border-radius: 100px;
+    outline: none;
+    border: none;
+    background-color: rgba(252, 3, 3, 1);
+    cursor: pointer;
+    transition: 0.3s ease-in-out;
+  }
+
+  
 
   // all text excluding title container
   &__type-box {

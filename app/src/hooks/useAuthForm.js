@@ -12,7 +12,8 @@ export const useAuthForm = (isUser, url) => {
   });
   const [formError, setFormError] = useState({});
   const [error, setError] = useState("");
-  const [isLoading, setisLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(false)
+  
 
   // function to update the state in authContext
   const { dispatch } = useAuthContext();
@@ -30,7 +31,7 @@ export const useAuthForm = (isUser, url) => {
     }));
   };
 
-  const handleFormValidation = (e) => {
+  const handleFormValidation = () => {
     // object to hold error values
     const isErrors = {};
 
@@ -50,17 +51,19 @@ export const useAuthForm = (isUser, url) => {
       isErrors["repeatPassword"] = "passwords must match";
     }
 
-    if (!isUser && !repeatPassword.trim()) {
-      isErrors["repeatPassword"] = "passwords must match";
-    }
-
     setFormError(isErrors);
     return isErrors;
   };
 
   const handleFormSubmit = async (e) => {
     e.preventDefault();
-    handleFormValidation();
+    const formErrors = handleFormValidation();
+    if(Object.keys(formErrors).length > 0){
+      return;
+    }
+
+
+    setIsLoading(true)
 
     try {
       // send post request
@@ -70,6 +73,8 @@ export const useAuthForm = (isUser, url) => {
         email: formData.email,
         password: formData.password,
       });
+
+      
 
       // store the response from the server
       const userResponse = response.data;
@@ -84,7 +89,10 @@ export const useAuthForm = (isUser, url) => {
       // catch any errors
     } catch (err) {
       // set the error message to alert user of error
-      setError(err.response.data.message);
+      setError(err?.response?.data?.message || "Something went wrong. Please try again.");
+
+    } finally{
+      setIsLoading(false)
     }
   };
 

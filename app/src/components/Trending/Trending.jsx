@@ -28,6 +28,7 @@ function Trending() {
             return (
               <TrendingVideoCard
                 key={uniqueId}
+                id={id}
                 category={category}
                 bookmarked={is_bookmarked}
                 trending={is_trending}

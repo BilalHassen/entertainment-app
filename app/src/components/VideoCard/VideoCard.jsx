@@ -1,8 +1,11 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import emptyBookMark from "../../../public/assets/icon-bookmark-empty.svg";
 import movie from "../../../public/assets/icon-category-movie.svg";
 import tv from "../../../public/assets/icon-category-tv.svg";
+import BookMarkButton from "../BookMarkButton/BookMarkButton";
 import "./VideoCard.scss";
+
+import { useBookMark } from "../../hooks/useBookMark";
 
 function VideoCard({
   category,
@@ -13,7 +16,10 @@ function VideoCard({
   title,
   url,
   year,
+  bookmarkedPage
 }) {
+  
+
   return (
     <>
       <div className="videoContainer__card">
@@ -25,13 +31,15 @@ function VideoCard({
             backgroundPosition: "center",
           }}
         >
-          <button className="videoContainer__book-btn">
-            <img
-              className="videoContainer__bookmark-icon"
-              src={emptyBookMark}
-              alt="bookmark icon"
-            />
-          </button>
+          <BookMarkButton
+          is_bookmarked={is_bookmarked}
+          prefixClass={"videoContainer"}
+          bookMarkIcon={emptyBookMark}
+          videoId={id}
+          videoCategory={"recommended"}
+          bookmarkPage={bookmarkedPage}
+          />
+        
         </div>
         <div className="videoContainer__content">
           <div className="videoContainer__text-content">

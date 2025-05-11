@@ -33,5 +33,5 @@ app.get("/", (req, res) => {
 });
 
 app.listen(3000, () => {
-  console.log("Welcome to the api");
+  console.log("Welcome to the api", `Server running on http://localhost:${3000}`);
 });

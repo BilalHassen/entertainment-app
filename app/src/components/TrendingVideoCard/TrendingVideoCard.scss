@@ -39,6 +39,18 @@
     }
   }
 
+  &__bookmarked{
+     width: 3rem;
+    height: 3rem;
+    border-radius: 100px;
+    outline: none;
+    border: none;
+    margin-left: auto;
+    background-color: rgba(252, 3, 3, 1);
+    cursor: pointer;
+    transition: 0.3s ease-in-out;
+  }
+
   &__bookmark-icon {
     height: 1.5rem;
     width: 1.2rem;

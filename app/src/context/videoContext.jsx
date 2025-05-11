@@ -12,14 +12,13 @@ export const useVideosContext = () => {
 // VideoProvider Component
 export const VideoProvider = ({ children }) => {
   const { user } = useAuthContext();
-  console.log(user);
   const [trendingVideos, setTrendingVideos] = useState([]);
   const [recommendedVideos, setRecommendedVideos] = useState([]);
   const [movies, setMovies] = useState([]);
   const [tvShows, setTvShows] = useState([]);
   const [bookmarks, setBookMarks] = useState([]);
 
-  useEffect(() => {
+  
     const fetchTrendingVideos = async () => {
       try {
         const response = await axios.get(
@@ -91,27 +90,34 @@ export const VideoProvider = ({ children }) => {
       }
     };
 
-    if (user && user.token) {
-      fetchTrendingVideos();
-      fetchRecommendedVideos();
-      fetchMovies();
-      fetchTvShows();
-      fetchBookMarkVideos();
-    }
-  }, [user]);
+    useEffect(()=>{
+      if (user && user.token) {
+        fetchTrendingVideos();
+        fetchRecommendedVideos();
+        fetchMovies();
+        fetchTvShows();
+        fetchBookMarkVideos();
+      }
+    }, [user])
+   
+
+  
 
   return (
     <videoContext.Provider
       value={{
         trendingVideos,
         setTrendingVideos,
+        fetchTrendingVideos,
         recommendedVideos,
         setRecommendedVideos,
+        fetchRecommendedVideos,
         movies,
         setMovies,
         tvShows,
         setTvShows,
         bookmarks,
+        fetchBookMarkVideos,
         setBookMarks,
       }}
     >

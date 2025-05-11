@@ -6,7 +6,7 @@ import LayOut from "../../components/LayOut/LayOut";
 import "./movies.scss";
 function Movies() {
   const { movies } = useVideosContext(); // Access the context
-  console.log(movies);
+
 
   return (
     <>

@@ -6,7 +6,7 @@ const jwt = require("jsonwebtoken");
 // pass in the user id, secret and expiration time of the token
 const createToken = (id) => {
   return jwt.sign({ id: id }, process.env.SECRET, {
-    expiresIn: "3d",
+    expiresIn: "30d",
   });
 };
 
