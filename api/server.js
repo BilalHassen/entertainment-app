@@ -2,7 +2,10 @@ const express = require("express");
 const app = express();
 const cors = require("cors");
 
+// allow requests from the front end
 app.use(cors());
+
+// automatically parse incoming JSON in the body of requests
 app.use(express.json());
 
 // get the route handlers
