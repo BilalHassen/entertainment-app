@@ -2,9 +2,10 @@ import React, { useEffect } from "react";
 import LayOut from "@components/LayOut/LayOut";
 import VideoContainer from "../../components/VideoContainer/VideoContainer";
 import { useVideosContext } from "../../context/videoContext";
+import { get } from "../../api/get";
 
 function BookMarks() {
-  const { bookmarks, fetchBookMarkVideos, } = useVideosContext();
+  const { bookmarks, setBookMarks } = useVideosContext();
   // filter out the movies and tv series
   const bookmarkMovies = bookmarks.filter(
     (movie) => movie.category !== "TV Series"
@@ -16,7 +17,7 @@ function BookMarks() {
 
   // load bookmark videos when navigation is to the bookmarks page
  useEffect(()=>{
-    fetchBookMarkVideos()
+  get("/bookmarks", setBookMarks);
  }, [])
 
   return (
