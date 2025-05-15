@@ -8,11 +8,9 @@ import { useVideosContext } from "../../context/videoContext";
 import "./Home.scss";
 
 function Home() {
-  const { recommendedVideos } = useVideosContext();
+  const { recommendedVideos, trendingVideos } = useVideosContext();
 
-  // useEffect(()=>{
-  //   console.log(recommendedVideos)
-  // },[recommendedVideos])
+
 
 
 

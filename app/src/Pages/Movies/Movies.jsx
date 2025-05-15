@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useVideosContext } from "../../context/videoContext";
 import VideoCard from "../../components/VideoCard/VideoCard";
 import VideoContainer from "../../components/VideoContainer/VideoContainer";
@@ -6,7 +6,6 @@ import LayOut from "../../components/LayOut/LayOut";
 import "./movies.scss";
 function Movies() {
   const { movies } = useVideosContext(); // Access the context
-
 
   return (
     <>

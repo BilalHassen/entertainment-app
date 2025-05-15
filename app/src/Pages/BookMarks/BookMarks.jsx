@@ -17,8 +17,12 @@ function BookMarks() {
 
   // load bookmark videos when navigation is to the bookmarks page
  useEffect(()=>{
-  get("/bookmarks", setBookMarks);
- }, [])
+  const refreshBookMarks = async () =>{
+    await get("/bookmarks", setBookMarks);
+  }
+  refreshBookMarks()
+  console.log(bookmarks)
+ },[])
 
   return (
     <LayOut>
@@ -39,7 +43,7 @@ function BookMarks() {
         // change this to a different layout use video container for now
         <VideoContainer
           data={bookmarkTvSeries}
-          title="Your Bookmared content will appear here"
+          title="Your Bookmarked content will appear here"
           bookmarkedPage={true}
         />
       )}

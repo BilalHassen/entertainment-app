@@ -2,11 +2,12 @@ import axios from "axios";
 import { useTokenContext } from "../context/TokenContext";
 import { useAuthContext } from "../hooks/useAuthContext";
 import { useVideosContext } from "../context/videoContext";
+import { get } from "../api/get";
 
 export const useBookMark = () => {
   const userId = useTokenContext();
   const user = useAuthContext();
-  const {fetchRecommendedVideos, fetchTrendingVideos, setTrendingVideos, setRecommendedVideos} = useVideosContext()
+  const { setTrendingVideos, setRecommendedVideos, setBookMarks} = useVideosContext()
 
  
   // get user token
@@ -56,44 +57,39 @@ export const useBookMark = () => {
     }
   };
 
-  const deleteBookMarkVideo = async (videoId, videoCategory) => {
-    const videoData = {
-      videoId: videoId,
-    }
-
-    console.log(videoCategory)
-
-    try{
-      const deleteResponse = await axios.delete("http://localhost:3000/bookmarks",
-      {
-        data: videoData,
-        // headers for the request
+  const deleteBookMarkVideo = async (videoId) => {
+    try {
+      await axios.delete("http://localhost:3000/bookmarks", {
+        data: { videoId },
         headers: {
           "Content-Type": "application/json",
           Authorization: `Bearer ${token}`,
         },
-      })
+      });
 
-      if(videoCategory === "trending"){
-        setTrendingVideos((prev)=>{
-          // take the array of videos and filter them based on the id, 
-          // spread the video object maintaining the rest of the other data
-          // then update the is_bookmarked key value pair
-          // if not return video object untouched
-          // return new array from map 
-          console.log("remove trending")
-          return prev.map((video)=> video.id === videoId ? {...video, is_bookmarked: false} : video)
-         })
-      } else {
-        setRecommendedVideos((prev)=>{
-          return prev.map((video)=> video.id === videoId ? {...video, is_bookmarked: false} : video)
-        })
-      }
-    }catch(err){
+      // Always update both video lists to keep icon state consistent
+      setTrendingVideos((prev) =>
+        prev.map((video) =>
+          video.id === videoId
+            ? { ...video, is_bookmarked: false }
+            : video
+        )
+      );
+
+      setRecommendedVideos((prev) =>
+        prev.map((video) =>
+          video.id === videoId
+            ? { ...video, is_bookmarked: false }
+            : video
+        )
+      );
+
+      // ✅ Refresh bookmarks context
+      await get("/bookmarks", setBookMarks);
+    } catch (err) {
       console.error("Error deleting bookmark:", err);
     }
-
-  }
+  };
 
   return { addBookMark, deleteBookMarkVideo };
 };
