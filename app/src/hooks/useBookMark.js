@@ -32,23 +32,7 @@ export const useBookMark = () => {
         }
       );
 
-      // get the updated recommended videos so they can reflect that the video is bookmarked
-       
-      if(videoCategory === "trending"){
-        setTrendingVideos((prev)=>{
-          // take the array of videos and filter them based on the id, 
-          // spread the video object maintaining the rest of the other data
-          // then update the is_bookmarked key value pair
-          // if not return video object untouched
-          // return new array from map 
-          return prev.map((video)=> video.id === videoId ? {...video, is_bookmarked: true} : video)
-         })
-      } else {
-        setRecommendedVideos((prev)=>{
-          return prev.map((video)=> video.id === videoId ? {...video, is_bookmarked: true} : video)
-        })
-      }
-
+     
      
       
 
@@ -67,25 +51,7 @@ export const useBookMark = () => {
         },
       });
 
-      // Always update both video lists to keep icon state consistent
-      setTrendingVideos((prev) =>
-        prev.map((video) =>
-          video.id === videoId
-            ? { ...video, is_bookmarked: false }
-            : video
-        )
-      );
-
-      setRecommendedVideos((prev) =>
-        prev.map((video) =>
-          video.id === videoId
-            ? { ...video, is_bookmarked: false }
-            : video
-        )
-      );
-
-      // ✅ Refresh bookmarks context
-      await get("/bookmarks", setBookMarks);
+   
     } catch (err) {
       console.error("Error deleting bookmark:", err);
     }
