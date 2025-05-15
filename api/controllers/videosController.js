@@ -4,10 +4,15 @@ const {
 } = require("../helper/collectDuplicateThumbnails");
 
 async function getTrendingVideos(req, res) {
+  const userId = req.user?.id;
+
   try {
     const trendingVideos = await knex("movies")
+      .leftJoin("bookmarks", function () {
+        this.on("movies.id", "=", "bookmarks.movie_id")
+            .andOn("bookmarks.user_id", "=", knex.raw("?", [userId]));
+      })
       .join("thumbnails", "movies.id", "=", "thumbnails.movie_id")
-      .leftJoin("bookmarks", "movies.id", "=", "bookmarks.movie_id")  // Changed to leftJoin
       .where("movies.is_trending", "=", true)
       .select(
         "movies.id",
@@ -15,24 +20,29 @@ async function getTrendingVideos(req, res) {
         "movies.year",
         "movies.category",
         "movies.rating",
-        "movies.is_bookmarked",
         "movies.is_trending",
         "thumbnails.url",
-        "bookmarks.is_bookmarked"
+        knex.raw("CASE WHEN bookmarks.id IS NOT NULL THEN true ELSE false END AS is_bookmarked")
       );
-    const formattedTrendingVideos = collectDuplicateThumbnails(trendingVideos);
 
+    const formattedTrendingVideos = collectDuplicateThumbnails(trendingVideos);
     res.status(200).json(formattedTrendingVideos);
   } catch (error) {
+    console.error(error);
     res.status(500).json({ message: "Internal Server Error" });
   }
 }
 
 async function getRecommendedVideos(req, res) {
+  const userId = req.user?.id;
+
   try {
     const recommendedVideos = await knex("movies")
+      .leftJoin("bookmarks", function () {
+        this.on("movies.id", "=", "bookmarks.movie_id")
+            .andOn("bookmarks.user_id", "=", knex.raw("?", [userId]));
+      })
       .join("thumbnails", "movies.id", "=", "thumbnails.movie_id")
-      .leftJoin("bookmarks", "movies.id", "=", "bookmarks.movie_id")  // Changed to leftJoin
       .where("movies.is_recommended", "=", true)
       .select(
         "movies.id",
@@ -42,21 +52,18 @@ async function getRecommendedVideos(req, res) {
         "movies.rating",
         "movies.is_recommended",
         "thumbnails.url",
-        "bookmarks.is_bookmarked"
+        knex.raw("CASE WHEN bookmarks.id IS NOT NULL THEN true ELSE false END AS is_bookmarked")
       );
-
-      
 
     const formattedRecommendedVideos =
       collectDuplicateThumbnails(recommendedVideos);
 
     res.status(200).json(formattedRecommendedVideos);
   } catch (error) {
+    console.error(error);
     res.status(500).json({ message: "Internal Server Error" });
   }
 }
-
-// use node module to export this function into other files
 
 module.exports = {
   getTrendingVideos,
