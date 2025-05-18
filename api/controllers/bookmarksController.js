@@ -33,7 +33,9 @@ async function getBookmarkVideos(req, res) {
 }
 
 async function bookMarkVideo(req, res) {
-  const { userId, videoId } = req.body;
+  const videoId = req.body.videoId;
+const userId = req.user.id;
+
   try {
     const existingVideo = await knex("bookmarks")
       .where({
@@ -46,8 +48,8 @@ async function bookMarkVideo(req, res) {
       return res.status(200).json({ message: "Already bookmarked." });
     }
     const insertVideo = await knex("bookmarks")
-      .where("user_id", "=", userId)
-      .insert({ user_id: userId, movie_id: videoId, is_bookmarked: true });
+    .insert({ user_id: userId, movie_id: videoId, is_bookmarked: true });
+  
 
     console.log("VIDEO ADDED", insertVideo);
     res.status(201).json({ message: "BookMarked" });
@@ -59,7 +61,9 @@ async function bookMarkVideo(req, res) {
 
 async function deleteBookMarkVideo(req, res){
   // carry on delete
-    const {videoId, title} = req.body
+  const videoId = req.body.videoId;
+  const userId = req.user.id;
+  
     try{
       const removeBookMarkVideo = await knex("bookmarks")
       .where("movie_id", "=", videoId).del()
