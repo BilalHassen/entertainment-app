@@ -14,13 +14,18 @@ import Tv from "./Pages/Tv/Tv";
 import Movies from "./Pages/Movies/Movies";
 import SignIn from "./Pages/SignIn/SignIn";
 import SignUp from "./Pages/SignUp/SignUp";
-import { TokenProvider, tokenContext } from "./context/TokenContext";
-// import LogOut from "./components/LogOut/LogOut";
+import { TokenProvider } from "./context/TokenContext";
+// TanStack Query setup
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+// Place outside of the app component  so QueryClient is only created once
+const queryClient = new QueryClient();
 
 function App() {
   const { user } = useAuthContext();
+
   return (
-    <>
+    //  Wrap everything inside QueryClientProvider
+    <QueryClientProvider client={queryClient}>
       <TokenProvider>
         <VideoProvider>
           <Router>
@@ -28,7 +33,7 @@ function App() {
               <Route
                 path="/"
                 element={!user ? <SignUp /> : <Navigate to="/home" />}
-              />{" "}
+              />
               <Route
                 path="/home"
                 element={user ? <Home /> : <Navigate to="/signin" />}
@@ -49,7 +54,7 @@ function App() {
           </Router>
         </VideoProvider>
       </TokenProvider>
-    </>
+    </QueryClientProvider>
   );
 }
 

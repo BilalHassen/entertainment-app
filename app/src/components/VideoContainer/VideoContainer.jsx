@@ -35,7 +35,6 @@ function VideoContainer({ data, title, bookmarkedPage = false }) {
               key={uniqueId}
               category={category}
               id={id}
-              is_bookmarked={is_bookmarked}
               is_recommended={is_recommended}
               rating={rating}
               title={title}

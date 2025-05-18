@@ -6,7 +6,7 @@ import movie from "../../../public/assets/icon-category-movie.svg";
 import tv from "../../../public/assets/icon-category-tv.svg";
 import BookMarkButton from "../BookMarkButton/BookMarkButton";
 import { useState, useEffect } from "react";
-import { useBookMark } from "../../hooks/useBookMark";
+
 
 function TrendingVideoCard({
   category,
@@ -30,12 +30,12 @@ function TrendingVideoCard({
       <div className="trendingVideos__content">
         {/*take this button structure and make a component */}
         <BookMarkButton
-          is_bookmarked={bookmarked}
-          bookMarkIcon={emptyBookMark}
-          prefixClass={"trendingVideos"}
-          videoId={id}
-          videoCategory={"trending"}
-        />
+  bookMarkIcon={emptyBookMark}
+  prefixClass={"trendingVideos"}
+  videoId={id}
+  bookmarkPage={false}
+/>
+
 
         <div className="trendingVideos__text-content">
           <div className="trendingVideos__flex-wrapper">

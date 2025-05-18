@@ -5,12 +5,11 @@ import tv from "../../../public/assets/icon-category-tv.svg";
 import BookMarkButton from "../BookMarkButton/BookMarkButton";
 import "./VideoCard.scss";
 
-import { useBookMark } from "../../hooks/useBookMark";
+
 
 function VideoCard({
   category,
   id,
-  is_bookmarked,
   is_recommended,
   rating,
   title,
@@ -32,14 +31,13 @@ function VideoCard({
             backgroundPosition: "center",
           }}
         >
-          <BookMarkButton
-          is_bookmarked={is_bookmarked}
-          prefixClass={"videoContainer"}
-          bookMarkIcon={emptyBookMark}
-          videoId={id}
-          videoCategory={"recommended"}
-          bookmarkPage={bookmarkedPage}
-          />
+         <BookMarkButton
+  prefixClass={"videoContainer"}
+  bookMarkIcon={emptyBookMark}
+  videoId={id}
+  bookmarkPage={bookmarkedPage}
+/>
+
         
         </div>
         <div className="videoContainer__content">

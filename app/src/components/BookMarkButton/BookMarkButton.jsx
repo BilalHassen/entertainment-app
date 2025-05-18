@@ -1,47 +1,46 @@
-import React, { useEffect } from 'react'
-import { useState } from 'react';
-import { useBookMark } from "../../hooks/useBookMark";
+import React from 'react';
+import { useBookmarksQuery } from '../../hooks/useBookmarksQuery';
+import { useToggleBookmark } from '../../hooks/useToggleBookmark';
+import { useAuthContext } from '../../hooks/useAuthContext';
 
-function BookMarkButton({is_bookmarked, bookMarkIcon, prefixClass, videoId, videoCategory, bookmarkPage = false }) {
+function BookMarkButton({ bookMarkIcon, prefixClass, videoId, bookmarkPage = false }) {
+  const { user } = useAuthContext();
+  const token = user?.token;
 
-    const [isBookmarkPage, setIsBookmarkPage] = useState(false)
   
 
-  const { addBookMark, deleteBookMarkVideo } = useBookMark();
-  const handleBookmark = async () => {
-    await addBookMark(videoId, videoCategory);
+
+  const { data: bookmarks, isLoading } = useBookmarksQuery(token);
+  const { addMutation, deleteMutation } = useToggleBookmark(token);
+
+  if (isLoading) return null; // or a loading spinner
+
+  // Check if this video is bookmarked
+  const isFilled = bookmarkPage || bookmarks?.some((item) => item.id === videoId);
+
+  // Bookmark or unbookmark the video
+  const handleClick = () => {
+    if (isFilled) {
+      deleteMutation.mutate(videoId);
+    } else {
+      addMutation.mutate(videoId);
+    }
   };
 
-  const removeBookMark = async () => {
-    await deleteBookMarkVideo(videoId, videoCategory);
-    console.log("clicked");
-  };
 
+  
 
-// isFilled will be a boolean value the one which video is bookmarked
-  const isFilled = bookmarkPage || is_bookmarked 
-
-  // ff it's filled click remove it. Otherwise, it will add the bookmark.
-  const handleClick = isFilled ? removeBookMark : handleBookmark
-
-  const buttonClass = `${prefixClass}__${
-    isFilled ? "bookmarked" : "book-btn"
-  }`;
+  const buttonClass = `${prefixClass}__${isFilled ? 'bookmarked' : 'book-btn'}`;
 
   return (
-    <>
-     <button
-    className={buttonClass}
-    onClick={handleClick}
-  >
-    <img
-      className={`${prefixClass}__bookmark-icon`}
-      src={bookMarkIcon}
-      alt="bookmark icon"
-    />
-  </button>
-      </>
-  )
+    <button className={buttonClass} onClick={handleClick}>
+      <img
+        className={`${prefixClass}__bookmark-icon`}
+        src={bookMarkIcon}
+        alt="bookmark icon"
+      />
+    </button>
+  );
 }
 
-export default BookMarkButton
+export default BookMarkButton;

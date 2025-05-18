@@ -1,28 +1,24 @@
-import React, { useEffect } from "react";
+import React from "react";
 import LayOut from "@components/LayOut/LayOut";
 import VideoContainer from "../../components/VideoContainer/VideoContainer";
-import { useVideosContext } from "../../context/videoContext";
-import { get } from "../../api/get";
+import { useBookmarksQuery } from "../../hooks/useBookmarksQuery";
+import { useAuthContext } from "../../hooks/useAuthContext";
 
 function BookMarks() {
-  const { bookmarks, setBookMarks } = useVideosContext();
-  // filter out the movies and tv series
+  const { user } = useAuthContext();
+  const token = user?.token;
+
+  const { data: bookmarks = [], isLoading } = useBookmarksQuery(token);
+
   const bookmarkMovies = bookmarks.filter(
-    (movie) => movie.category !== "TV Series"
+    (video) => video.category !== "TV Series"
   );
 
   const bookmarkTvSeries = bookmarks.filter(
-    (movie) => movie.category === "TV Series"
+    (video) => video.category === "TV Series"
   );
 
-  // load bookmark videos when navigation is to the bookmarks page
- useEffect(()=>{
-  const refreshBookMarks = async () =>{
-    await get("/bookmarks", setBookMarks);
-  }
-  refreshBookMarks()
-  console.log(bookmarks)
- },[])
+  if (isLoading) return <LayOut>Loading...</LayOut>;
 
   return (
     <LayOut>
@@ -40,9 +36,8 @@ function BookMarks() {
           />
         </>
       ) : (
-        // change this to a different layout use video container for now
         <VideoContainer
-          data={bookmarkTvSeries}
+          data={[]}
           title="Your Bookmarked content will appear here"
           bookmarkedPage={true}
         />
