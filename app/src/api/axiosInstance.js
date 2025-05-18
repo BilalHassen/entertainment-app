@@ -14,7 +14,7 @@ axiosInstance.interceptors.request.use((config)=>{
     }
 
     // return the config object 
-    console.log("➡️ Outgoing request headers:", config.headers);
+    // console.log("➡️ Outgoing request headers:", config.headers);
   return config;
 })
 

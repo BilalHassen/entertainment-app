@@ -7,7 +7,7 @@ import { get } from "../api/get";
 export const useBookMark = () => {
   const userId = useTokenContext();
   const user = useAuthContext();
-  const { setTrendingVideos, setRecommendedVideos, setBookMarks} = useVideosContext()
+  const { setTrendingVideos, setRecommendedVideos, setBookMarks, setMovies, setTvShows} = useVideosContext()
 
  
   // get user token
@@ -15,6 +15,9 @@ export const useBookMark = () => {
   // body data to be sent with request
 
   const addBookMark = async (videoId, videoCategory) => {
+
+    console.log(videoId)
+
     const userData = {
       userId: userId,
       videoId: videoId,
@@ -32,11 +35,16 @@ export const useBookMark = () => {
         }
       );
 
-     
+      await get("/videos/trending-videos", setTrendingVideos);
+      await get("/videos/recommended-videos", setRecommendedVideos);
+      await get("/movies", setMovies);
+      await get("/tv", setTvShows);
+      await get("/bookmarks", setBookMarks);
      
       
 
     } catch (error) {
+      console.log(error)
       console.error("Error adding bookmark:", error);
     }
   };
@@ -51,6 +59,11 @@ export const useBookMark = () => {
         },
       });
 
+      await get("/videos/trending-videos", setTrendingVideos);
+      await get("/videos/recommended-videos", setRecommendedVideos);
+      await get("/movies", setMovies);
+      await get("/tv", setTvShows);
+      await get("/bookmarks", setBookMarks);
    
     } catch (err) {
       console.error("Error deleting bookmark:", err);

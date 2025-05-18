@@ -5,7 +5,7 @@ import { useBookMark } from "../../hooks/useBookMark";
 function BookMarkButton({is_bookmarked, bookMarkIcon, prefixClass, videoId, videoCategory, bookmarkPage = false }) {
 
     const [isBookmarkPage, setIsBookmarkPage] = useState(false)
-
+  
 
   const { addBookMark, deleteBookMarkVideo } = useBookMark();
   const handleBookmark = async () => {
